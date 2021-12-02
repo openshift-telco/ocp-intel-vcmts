@@ -1,0 +1,13 @@
+# Intel VCMTS package version
+VCMTS_VERSION="21.10.0-beta"
+# Build directory
+VCMTS_ROOT="/usr/src/vcmts"
+
+# Change version with corresponding Intel VCMTS build requirements
+DPDK_VERSION="21.02"
+DPDK_VERSION_PKTGEN="20.08"
+IPSEC_MB_VERSION="0.55"
+COLLECTD_VERSION="5.12.0"
+PKTGEN_VERSION="19.10.0"
+GRAFANA_VERSION="7.2.0"
+PROMETHEUS_VERSION="2.0.0"
