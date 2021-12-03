@@ -21,9 +21,9 @@ buildah run $vcmts_dev mkdir ${VCMTS_ROOT}
 buildah run $vcmts_dev mkdir /vcmts
 buildah run $vcmts_dev mkdir /vcmts-config
 
-buildah copy $vcmts_dev intel-vcmtsd-v${VCMTS_VERSION//./-}.tar ${VCMTS_ROOT}
+buildah copy $vcmts_dev intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
 buildah config --workingdir ${VCMTS_ROOT} $vcmts_dev
-buildah run $vcmts_dev tar xvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar
+buildah run $vcmts_dev tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz
 
 echo -e "Install packages and dependencies"
 buildah run $vcmts_dev dnf install -y --nogpgcheck --disableplugin=subscription-manager git golang gcc-c++ gcc cmake make automake autoconf patch libtool openssl-devel python3-pip wget xz bzip2

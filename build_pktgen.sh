@@ -21,9 +21,9 @@ buildah config --env RTE_SDK=${VCMTS_ROOT}/dpdk $pktgen_dev
 echo -e "Copy and uncompress Intel VCMTS package"
 buildah run $pktgen_dev mkdir ${VCMTS_ROOT}
 
-buildah copy $pktgen_dev intel-vcmtsd-v${VCMTS_VERSION//./-}.tar ${VCMTS_ROOT}
+buildah copy $pktgen_dev intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
 buildah config --workingdir ${VCMTS_ROOT} $pktgen_dev
-buildah run $pktgen_dev tar xvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar
+buildah run $pktgen_dev tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz
  
 echo -e "Install packages and dependencies"
 buildah run $pktgen_dev dnf install -y --nogpgcheck --disableplugin=subscription-manager git golang gcc-c++ gcc cmake make automake autoconf bzip2 patch libtool openssl-devel python3-pip wget xz

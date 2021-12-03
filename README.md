@@ -35,9 +35,9 @@ Clone this repository.
 $ git clone https://github.com/openshift-telco/ocp-intel-cvmts
 ```
 
-Acquire Intel vCMTS package and copy to `ocp-intel-vcmts` directory. Example package: `intel-vcmtsd-v21-10-0-beta.tar`
-Edit `build_config` and adjust as needed according to required build versions.
-Example:
+Acquire Intel vCMTS package and copy to `ocp-intel-vcmts` directory. 
+Example package: `intel-vcmtsd-v21-10-0-beta.tar.gz`.
+Edit `build_config` and adjust as needed according to required build versions. Example:
 
 ```
 $ cat build_config 
