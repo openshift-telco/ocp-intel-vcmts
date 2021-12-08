@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-vcmts-archive
+  namespace: vcmts-build
+spec:
+  params:
+    - name: HTTP_SERVER
+      type: string
+    - name: VCMTS_VERSION
+      type: string
+  steps:
+    - command:
+        - /bin/bash
+        - '-c'
+        - >-
+          curl
+          $(inputs.params.HTTP_SERVER)/intel-vcmtsd-v$(inputs.params.VCMTS_VERSION).tar.gz
+          -o
+          /workspace/output/intel-vcmtsd-v$(inputs.params.VCMTS_VERSION).tar.gz
+      image: registry.redhat.io/ubi7/ubi-minimal
+      name: ''
+      resources: {}
+  workspaces:
+    - description: Where to store the archive
+      name: output
