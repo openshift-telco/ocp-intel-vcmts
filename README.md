@@ -25,6 +25,7 @@ This document describes how to build, install and run the Intel vCMTS reference 
   - Helm3
   - Intel vCMTS Package
   - OpenShift Container Storage
+  - [OpenShift Pipeline](https://docs.openshift.com/container-platform/4.9/cicd/pipelines/installing-pipelines.html)
 
 ## Architecture
 
@@ -59,7 +60,16 @@ $ oc cp intel-vcmts-image.tar http-server-6469986b9f-xrrcm:/var/www/html/ -n vcm
 
 #### OpenShift Pipeline
 
+This requires [OpenShift Pipelines](https://docs.openshift.com/container-platform/4.9/cicd/pipelines/installing-pipelines.html) to be installed.
+
+Start by creating the namespace in which the pipeline will be deployed:
+
+~~~
+$ oc create ns vcmts-build
+~~~
+
 ##### Authentication to git repository
+
 In order for the pipeline to authenticate to the Github repository, you must provide have a key-pair with the public key in your Github account, and load the private key into the OpenShift project.
 
 See the `github-auth-secret_EXAMPLE.yaml` and replace `YOUR_BASE64_ENCODED_PRIVATE_KEY` with your encoded private key.
@@ -76,6 +86,7 @@ oc policy add-role-to-user registry-editor -z pipeline -n vcmts-build
 ~~~
 
 ##### Pipeline share workspace
+
 In order to pass data between the pipeline tasks, a shared workspace is setup.
 
 ~~~
@@ -83,9 +94,10 @@ oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
 ~~~
 
 ##### Pipeline tasks
+
 The pipeline is comprised of 4 tasks, as follow:
 
-![Architecture](https://raw.githubusercontent.com/openshift-telco/ocp-intel-vcmts/main/images/pipeline-overview.png)
+![Architecture](https://raw.githubusercontent.com/openshift-telco/ocp-intel-vcmts/pipeline/images/pipeline-overview.png?token=AAZQQKJ2AYUQA5LYEVTY3TDBWOX4O)
 
 The details for the `get-vcmts-archive` and `build-*` tasks are in `pipeline/tasks` folder
 
@@ -97,6 +109,7 @@ $ oc create -f pipeline/tasks/get-vcmts-archive.yaml
 ~~~
 
 ##### Pipeline
+
 The pipeline supports the following parameters, with their according default value.
 Cuztomize as needed.
 
@@ -118,6 +131,13 @@ Create the pipeline:
 $ oc create -f pipeline/pipeline.yaml
 ~~~
 
+##### Run the pipeline
+
+Finally, you can now deploy the pipeline run object to trigger the build:
+
+~~~
+$ oc create -f pipeline/pipeline-run.yaml
+~~~
 
 ### Local Build
 

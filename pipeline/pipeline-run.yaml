@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: vcmts-build-0001
+  namespace: vcmts-build
+  labels:
+    tekton.dev/pipeline: vcmts-build
+spec:
+  params:
+    - name: HTTP_SERVER
+      value: 'http-server.vcmts-build:8080'
+    - name: VCMTS_VERSION
+      value: 21.10.0
+    - name: REGISTRY_URL
+      value: 'image-registry.openshift-image-registry.svc:5000'
+  pipelineRef:
+    name: vcmts-build
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: vcmts-build-workspace
