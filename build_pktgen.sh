@@ -3,17 +3,18 @@
 ## Container build for PKTGEN to simulate traffic
 ##
 
-# only for local build
-source build_config
-
 # Exit script on first error
 set -o errexit
 
+# only for local build
+# source build_config
+
 # Set envs
 ISREDHATOS=y
+PKTGEN_HOST=y
 IMAGE_NAME=${REGISTRY_URL}/vcmts-pktgen
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
-PKTGEN_HOST=y
+VCMTS_ROOT="/usr/src/vcmts"
 MYHOME=${VCMTS_ROOT}
 
 echo -e "Copy and uncompress Intel VCMTS package"

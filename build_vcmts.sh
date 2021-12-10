@@ -3,19 +3,20 @@
 ## Container build for Intel VCMTS Data Plane Application
 ##
 
-# only for local build
-source build_config
-
 # Exit script on first error
 set -o errexit
 
+# only for local build
+# source build_config
+
 # Set envs
 ISREDHATOS=y
+VCMTSD_HOST=y
 IMAGE_NAME=${REGISTRY_URL}/vcmts-pktgen
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
-VCMTSD_HOST=y
+VCMTS_ROOT="/usr/src/vcmts"
 MYHOME=${VCMTS_ROOT}
-export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig
+PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig
 
 echo -e "Copy and uncompress Intel VCMTS package"
 mkdir -p ${VCMTS_ROOT}

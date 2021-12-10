@@ -11,42 +11,10 @@ spec:
       type: string
     - name: VCMTS_VERSION
       type: string
-    - name: VCMTS_ROOT
-      type: string
-    - name: DPDK_VERSION
-      type: string
-    - name: DPDK_VERSION_PKTGEN
-      type: string
-    - name: IPSEC_MB_VERSION
-      type: string
-    - name: COLLECTD_VERSION
-      type: string
-    - name: PKTGEN_VERSION
-      type: string
-    - name: GRAFANA_VERSION
-      type: string
-    - name: PROMETHEUS_VERSION
-      type: string
   steps:
     - env:
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
-        - name: VCMTS_ROOT
-          value: $(params.VCMTS_ROOT)
-        - name: DPDK_VERSION
-          value: $(params.DPDK_VERSION)
-        - name: DPDK_VERSION_PKTGEN
-          value: $(params.DPDK_VERSION_PKTGEN)
-        - name: IPSEC_MB_VERSION
-          value: $(params.IPSEC_MB_VERSION)
-        - name: COLLECTD_VERSION
-          value: $(params.COLLECTD_VERSION)
-        - name: PKTGEN_VERSION
-          value: $(params.PKTGEN_VERSION)
-        - name: GRAFANA_VERSION
-          value: $(params.GRAFANA_VERSION)
-        - name: PROMETHEUS_VERSION
-          value: $(params.PROMETHEUS_VERSION)
         - name: REGISTRY_URL
           value: $(params.REGISTRY_URL)
       image: registry.redhat.io/rhel8/buildah

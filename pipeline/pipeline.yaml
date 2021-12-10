@@ -12,32 +12,6 @@ spec:
       description: Intel VCMTS package version
       name: VCMTS_VERSION
       type: string
-    - default: /usr/src/vcmts
-      description: Build directory
-      name: VCMTS_ROOT
-      type: string
-    - default: '21.02'
-      description: Change version with corresponding Intel VCMTS build requirements
-      name: DPDK_VERSION
-      type: string
-    - default: '20.08'
-      name: DPDK_VERSION_PKTGEN
-      type: string
-    - default: '0.55'
-      name: IPSEC_MB_VERSION
-      type: string
-    - default: 5.12.0
-      name: COLLECTD_VERSION
-      type: string
-    - default: 19.10.0
-      name: PKTGEN_VERSION
-      type: string
-    - default: 7.2.0
-      name: GRAFANA_VERSION
-      type: string
-    - default: 2.0.0
-      name: PROMETHEUS_VERSION
-      type: string
     - default: 'image-registry.openshift-image-registry.svc:5000'
       name: REGISTRY_URL
       type: string
@@ -89,22 +63,6 @@ spec:
           value: build_vcmts.sh
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
-        - name: VCMTS_ROOT
-          value: $(params.VCMTS_ROOT)
-        - name: DPDK_VERSION
-          value: $(params.DPDK_VERSION)
-        - name: DPDK_VERSION_PKTGEN
-          value: $(params.DPDK_VERSION_PKTGEN)
-        - name: IPSEC_MB_VERSION
-          value: $(params.IPSEC_MB_VERSION)
-        - name: COLLECTD_VERSION
-          value: $(params.COLLECTD_VERSION)
-        - name: PKTGEN_VERSION
-          value: $(params.PKTGEN_VERSION)
-        - name: GRAFANA_VERSION
-          value: $(params.GRAFANA_VERSION)
-        - name: PROMETHEUS_VERSION
-          value: $(params.PROMETHEUS_VERSION)
         - name: REGISTRY_URL
           value: $(params.REGISTRY_URL)
       runAfter:
@@ -121,22 +79,6 @@ spec:
           value: build_pktgen.sh
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
-        - name: VCMTS_ROOT
-          value: $(params.VCMTS_ROOT)
-        - name: DPDK_VERSION
-          value: $(params.DPDK_VERSION)
-        - name: DPDK_VERSION_PKTGEN
-          value: $(params.DPDK_VERSION_PKTGEN)
-        - name: IPSEC_MB_VERSION
-          value: $(params.IPSEC_MB_VERSION)
-        - name: COLLECTD_VERSION
-          value: $(params.COLLECTD_VERSION)
-        - name: PKTGEN_VERSION
-          value: $(params.PKTGEN_VERSION)
-        - name: GRAFANA_VERSION
-          value: $(params.GRAFANA_VERSION)
-        - name: PROMETHEUS_VERSION
-          value: $(params.PROMETHEUS_VERSION)
         - name: REGISTRY_URL
           value: $(params.REGISTRY_URL)
       runAfter:
