@@ -19,8 +19,7 @@ MYHOME=${VCMTS_ROOT}
 echo -e "Copy and uncompress Intel VCMTS package"
 mkdir -p ${VCMTS_ROOT}
 cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
-cd ${VCMTS_ROOT}
-tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz
+tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
 # add Red Hat Containerfile
 cp patches/pktgen-Dockerfile.RedHat ${VCMTS_ROOT}/vcmts/pktgen/container/Dockerfile.RedHat
