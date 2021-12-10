@@ -64,4 +64,4 @@ echo -e "Build vCMTS-D"
 sed -e "s#/usr/lib/pkgconfig/libcollectdclient.pc#/usr/lib64/pkgconfig/libcollectdclient.pc#g" -i ${VCMTS_ROOT}/src/app/vcmtsd/Makefile
 build_container_vcmtsd
 
-buildah --storage-driver vfs push ${IMAGE_NAME}
+buildah --storage-driver vfs push ${IMAGE_TAG}

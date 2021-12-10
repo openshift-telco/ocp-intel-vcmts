@@ -52,4 +52,4 @@ build_baremetal_dpdk
 echo -e "Build Pkgtgen"
 build_container_pktgen
 
-buildah --storage-driver vfs push ${IMAGE_NAME}
+buildah --storage-driver vfs push ${IMAGE_TAG}
