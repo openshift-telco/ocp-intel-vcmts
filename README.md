@@ -97,7 +97,7 @@ oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
 
 The pipeline is comprised of 4 tasks, as follow:
 
-![Architecture](https://raw.githubusercontent.com/openshift-telco/ocp-intel-vcmts/pipeline/images/pipeline-overview.png?token=AAZQQKJ2AYUQA5LYEVTY3TDBWOX4O)
+![Architecture](images/pipeline-overview.png)
 
 The details for the `get-vcmts-archive` and `build-*` tasks are in `pipeline/tasks` folder
 
