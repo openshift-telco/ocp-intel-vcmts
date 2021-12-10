@@ -12,7 +12,7 @@ set -o errexit
 # Set envs
 ISREDHATOS=y
 VCMTSD_HOST=y
-IMAGE_NAME=${REGISTRY_URL}/vcmts-pktgen
+IMAGE_NAME=${REGISTRY_URL}/vcmts
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
 VCMTS_ROOT="/usr/src/vcmts"
 MYHOME=${VCMTS_ROOT}
