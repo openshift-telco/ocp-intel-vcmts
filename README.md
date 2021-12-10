@@ -139,6 +139,15 @@ Finally, you can now deploy the pipeline run object to trigger the build:
 $ oc create -f pipeline/pipeline-run.yaml
 ~~~
 
+After +/- 15mn, when the build is done, you should see this:
+
+~~~
+$ oc get imagestream -n vcmts-build
+NAME           IMAGE REPOSITORY                                                                          TAGS      UPDATED
+vcmts          default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts          21.10.0   2 minutes ago
+vcmts-pktgen   default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-pktgen   21.10.0   7 minutes ago
+~~~
+
 ### Local Build
 
 Clone this repository.
