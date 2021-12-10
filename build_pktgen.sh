@@ -32,12 +32,16 @@ source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 
 # install_base_ubuntu_pkgs
 echo -e "Install packages and dependencies"
-dnf install -y --nogpgcheck --disableplugin=subscription-manager git golang gcc-c++ gcc cmake make automake autoconf bzip2 patch libtool openssl-devel python3-pip wget xz
-dnf install -y --nogpgcheck --disableplugin=subscription-manager http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/ninja-build-1.8.2-1.el8.x86_64.rpm http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/meson-0.55.3-3.el8.noarch.rpm
-dnf install -y --nogpgcheck --disableplugin=subscription-manager http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/jansson-devel-2.11-3.el8.x86_64.rpm
-dnf install -y --nogpgcheck --disableplugin=subscription-manager http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-11.el8.x86_64.rpm http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-devel-2.0.12-11.el8.x86_64.rpm
-# libpcap and lua needed to compile pktgen
-dnf install -y --nogpgcheck --disableplugin=subscription-manager http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/libpcap-devel-1.9.1-5.el8.x86_64.rpm http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/lua-devel-5.3.4-12.el8.x86_64.rpm
+dnf install -y --nogpgcheck --disableplugin=subscription-manager \
+  git golang gcc-c++ gcc cmake make automake autoconf bzip2 patch libtool openssl-devel python3-pip wget xz \
+  http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/ninja-build-1.8.2-1.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/meson-0.55.3-3.el8.noarch.rpm \
+  http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/jansson-devel-2.11-3.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-11.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-devel-2.0.12-11.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/libpcap-devel-1.9.1-5.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/lua-devel-5.3.4-12.el8.x86_64.rpm
 pip3 install pyelftools
 dnf clean all
 rm -fr /var/cache/dnf
@@ -48,9 +52,4 @@ build_baremetal_dpdk
 echo -e "Build Pkgtgen"
 build_container_pktgen
 
-# buildah requires a slight modification to the push secret provided by the service account to use it for pushing the image
-cp /var/run/secrets/openshift.io/push/.dockercfg /tmp
-(echo "{ \"auths\": " ; cat /var/run/secrets/openshift.io/push/.dockercfg ; echo "}") > /tmp/.dockercfg
-
-# push the new image to the target for the build
-buildah --storage-driver vfs --storage-driver vfs push --tls-verify=false --authfile /tmp/.dockercfg ${IMAGE_TAG}
+buildah --storage-driver vfs push ${IMAGE_NAME}

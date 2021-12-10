@@ -21,7 +21,6 @@ spec:
       name: build
       resources: {}
       script: |
-        ls -lRt
         cd /workspace/input
         ./$(inputs.params.SCRIPT_TO_EXECUTE)
   workspaces:

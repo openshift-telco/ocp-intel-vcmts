@@ -64,7 +64,7 @@ spec:
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
         - name: REGISTRY_URL
-          value: $(params.REGISTRY_URL)
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
       runAfter:
         - get-vcmts-archive
       taskRef:
@@ -80,7 +80,7 @@ spec:
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
         - name: REGISTRY_URL
-          value: $(params.REGISTRY_URL)
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
       runAfter:
         - get-vcmts-archive
       taskRef:
