@@ -19,11 +19,11 @@ MYHOME=${VCMTS_ROOT}
 
 echo -e "Copy and uncompress Intel VCMTS package"
 mkdir -p ${VCMTS_ROOT}
-cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
-tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
+cp ../intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
+tar zxvf ../intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
 echo -e "Copy Intel VCMTS fixedsz traffic policies"
-cp intel-vcmtsd-fixedsz-tp-${VCMTS_VERSION}.tar.bz2 ${VCMTS_ROOT}/vcmts/traffic-profiles/
+cp ../intel-vcmtsd-fixedsz-tp-${VCMTS_VERSION}.tar.bz2 ${VCMTS_ROOT}/vcmts/traffic-profiles/
 
 # add Red Hat Containerfile
 cp patches/pktgen-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/pktgen/container/Containerfile.ubi8
