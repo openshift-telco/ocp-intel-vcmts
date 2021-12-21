@@ -5,15 +5,23 @@ metadata:
   namespace: vcmts-build
 spec:
   params:
-    - default: 'http-server.vcmts-build:8080'
-      name: HTTP_SERVER
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-v21-10-0.tar.gz
+      description: URL to the Intel vCMTS package
+      name: VCMTSD_PACKAGE_URL
       type: string
     - default: 21.10.0
       description: Intel VCMTS package version
       name: VCMTS_VERSION
       type: string
     - default: 'image-registry.openshift-image-registry.svc:5000'
+      description: Container Registry where to save the images
       name: REGISTRY_URL
+      type: string
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-fixedsz-tp-21.10.0.tar.bz2
+      description: 'URL to Intel vCMTS fixedsz traffic policies'
+      name: VCMTSD_FIXEDSZ_TP_URL
       type: string
   tasks:
     - name: git-clone
@@ -45,10 +53,10 @@ spec:
           workspace: shared-workspace
     - name: get-vcmts-archive
       params:
-        - name: HTTP_SERVER
-          value: $(params.HTTP_SERVER)
-        - name: VCMTS_VERSION
-          value: $(params.VCMTS_VERSION)
+        - name: VCMTSD_PACKAGE_URL
+          value: $(params.VCMTSD_PACKAGE_URL)
+        - name: VCMTSD_FIXEDSZ_TP_URL
+          value: $(params.VCMTSD_FIXEDSZ_TP_URL)
       runAfter:
         - git-clone
       taskRef:

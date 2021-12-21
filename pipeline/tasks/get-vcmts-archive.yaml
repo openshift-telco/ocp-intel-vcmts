@@ -5,20 +5,16 @@ metadata:
   namespace: vcmts-build
 spec:
   params:
-    - name: HTTP_SERVER
+    - name: VCMTSD_PACKAGE_URL
       type: string
-    - name: VCMTS_VERSION
+    - name: VCMTSD_FIXEDSZ_TP_URL
       type: string
   steps:
     - image: registry.redhat.io/ubi7/ubi-minimal
-      name: ''
-      resources: {}
-      script: >
-        DOTED_VERSION=$(inputs.params.VCMTS_VERSION)
-        DASH_VERSION=${DOTED_VERSION//./-}
-
-        curl $(inputs.params.HTTP_SERVER)/intel-vcmtsd-v${DASH_VERSION}.tar.gz
-        -o /workspace/output/intel-vcmtsd-v${DASH_VERSION}.tar.gz
+      name: get-packages
+      script: |
+        curl $(inputs.params.VCMTSD_PACKAGE_URL) -o /workspace/output/
+        curl $(inputs.params.VCMTSD_FIXEDSZ_TP_URL) -o /workspace/output/
   workspaces:
     - description: Where to store the archive
       name: output
