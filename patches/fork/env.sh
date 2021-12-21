@@ -336,7 +336,7 @@ function build
 	cd "$1"
 # CHANGE FROM REDHAT
 	if [ "${IS_RHEL}" -eq 1 ]; then
-		buildah --storage-driver vfs bud -t ${IMAGE_TAG} Dockerfile.RedHat
+		buildah --storage-driver vfs bud --build-arg VCMTS_VERSION=$VCMTS_VERSION -t ${IMAGE_TAG} Containerfile.ubi8
 		return
 	else
 		buildah bud -t localhost:30500/"$2":"release" .

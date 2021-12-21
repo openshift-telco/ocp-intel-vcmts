@@ -4,15 +4,15 @@ LABEL maintainer="Intel Corporation"
 
 LABEL com.redhat.component="ubi8-container" \
       name="vcmts" \
-      version="v21.10.0"
+      version="${VCMTS_VERSION}"
 
 #label for EULA
 LABEL com.redhat.license_terms=""
 
 #labels for container catalog
-LABEL summary="Provides the v21.10.0 release of Intel vCMTS."
+LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS."
 LABEL description=""
-LABEL io.k8s.display-name="Intel vCMTS v21.10.0"
+LABEL io.k8s.display-name="Intel vCMTS ${VCMTS_VERSION}"
 LABEL io.openshift.expose-services=""
 LABEL io.openshift.tags="vcmts"
 
