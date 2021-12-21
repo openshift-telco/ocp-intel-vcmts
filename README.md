@@ -10,7 +10,8 @@
   - [Build Container Images](#build-container-images)
     - [Pipeline Build](#pipeline-build)
     - [Local Build](#local-build)
-  - [Installation](#installation)
+  - [SRIOV Config](#sriov-config)
+  - [Deploy the application](#deploy-the-application)
 <!-- TOC -->
 
 ## Introduction
