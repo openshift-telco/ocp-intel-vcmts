@@ -20,13 +20,12 @@ This document describes how to build, install and run the Intel vCMTS reference 
 
 ## Prerequisities
 
-  - Red Hat OpenShift version 4.9
-  - Podman
-  - Buildah
-  - Helm3
   - Intel vCMTS Package
-  - OpenShift Container Storage
-  - [OpenShift Pipeline](https://docs.openshift.com/container-platform/4.9/cicd/pipelines/installing-pipelines.html)
+  - Red Hat OpenShift version 4.8.20
+  - Red Hat OpenShift Data Foundation
+  - Red Hat OpenShift Pipeline
+  - Podman / Buildah (for local build only)
+  - Helm 3 (for local build only)
 
 ## Architecture
 
