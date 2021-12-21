@@ -1,0 +1,31 @@
+FROM registry.access.redhat.com/ubi8/ubi
+
+LABEL maintainer="Intel Corporation"
+
+LABEL com.redhat.component="ubi8-container" \
+      name="platform-management-tool" \
+      version="${VCMTS_VERSION}"
+
+#label for EULA
+LABEL com.redhat.license_terms=""
+
+#labels for container catalog
+LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS Platform Management Tool."
+LABEL description=""
+LABEL io.k8s.display-name="Intel vCMTS ${VCMTS_VERSION} Platform Management Tool."
+LABEL io.openshift.expose-services=""
+LABEL io.openshift.tags="vcmts"
+
+RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager python39 python39-pip
+
+RUN useradd -s /bin/bash -d /home/vcmts/ -m -u 1999 vcmts
+USER vcmts
+
+RUN mkdir /home/vcmts/platform-management-tool
+COPY *.py /home/vcmts/platform-management-tool/
+WORKDIR /home/vcmts/platform-management-tool/
+
+RUN pip3 install virtualenv
+RUN python3 -m virtualenv env
+RUN source env/bin/activate
+RUN pip3 install -e .
