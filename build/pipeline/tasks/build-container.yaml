@@ -21,7 +21,7 @@ spec:
       name: build
       resources: {}
       script: |
-        cd /workspace/input
+        cd /workspace/input/build
         ./$(inputs.params.SCRIPT_TO_EXECUTE)
   workspaces:
     - description: Getting the script from input
