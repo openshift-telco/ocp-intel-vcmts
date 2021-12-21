@@ -40,11 +40,11 @@
 
 GR='\033[0;32m'
 NC='\033[0m'
-ISPKTGEN=1; ISVCMTS=1; ISANSIBLE=1; ISREDHATOS=1
+ISPKTGEN=1; ISVCMTS=1; ISANSIBLE=1; IS_RHEL=1
 if [[ -z "${PKTGEN_HOST}" ]]; then ISPKTGEN=0; fi
 if [[ -z "${VCMTSD_HOST}" ]]; then ISVCMTS=0; fi
 if [[ -z "${ANSIBLE_HOST}" ]]; then ISANSIBLE=0; fi
-if [[ -z "${ISREDHATOS}" ]]; then ISREDHATOS=0; fi
+if [[ -z "${IS_RHEL_BUILD}" ]]; then IS_RHEL=0; fi
 
 # Check if all unset or set
 if [ ${ISVCMTS} -eq 0 -a ${ISPKTGEN} -eq 0 -a ${ISANSIBLE} -eq 0 ]; then
@@ -335,7 +335,7 @@ function build
 {
 	cd "$1"
 # CHANGE FROM REDHAT
-	if [ "${ISREDHATOS}" -eq 1 ]; then
+	if [ "${IS_RHEL}" -eq 1 ]; then
 		buildah --storage-driver vfs bud -t ${IMAGE_TAG} Dockerfile.RedHat
 		return
 	else
@@ -497,7 +497,7 @@ function build_baremetal_dpdk {
 		git checkout v${DPDK_VERSION_PKTGEN}
 
     # CHANGE FROM REDHAT
-		if [ "${ISREDHATOS}" -eq 1 ]; then
+		if [ "${IS_RHEL}" -eq 1 ]; then
 			sed -e 's/\(#define VIRTIO_F_IOMMU_PLATFORM\t\t33\)/\/*\1*\//g' -i $MYHOME/dpdk/drivers/vdpa/ifc/base/ifcvf.h
 		fi
     # ------------------

@@ -10,7 +10,7 @@ set -o errexit
 # source build_config
 
 # Set envs
-ISREDHATOS=y
+IS_RHEL_BUILD=y
 PKTGEN_HOST=y
 IMAGE_NAME=${REGISTRY_URL}/vcmts-pktgen
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}

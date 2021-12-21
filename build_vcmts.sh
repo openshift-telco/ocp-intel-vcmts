@@ -10,7 +10,7 @@ set -o errexit
 # source build_config
 
 # Set envs
-ISREDHATOS=y
+IS_RHEL_BUILD=y
 VCMTSD_HOST=y
 IMAGE_NAME=${REGISTRY_URL}/vcmts
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
