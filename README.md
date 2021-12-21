@@ -3,12 +3,11 @@
 ## Table of Contents
 
 <!-- TOC -->
-- [Intel vCMTS on OpenShift](#intel-vcmts-on-openshift)
-  - [Introduction](#introduction)
-  - [Prerequisities](#prerequisities)
-  - [Build Container Images](#build-container-images)
-  - [Network Setup](#network-setup)
-  - [Deploy the application](#deploy-the-application)
+- [Introduction](#introduction)
+- [Prerequisities](#prerequisities)
+- [Build Container Images](#build-container-images)
+- [Network Setup](#network-setup)
+- [Deploy the application](#deploy-the-application)
 <!-- TOC -->
 
 ## Introduction
