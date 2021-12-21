@@ -6,11 +6,8 @@
 - [Intel vCMTS on OpenShift](#intel-vcmts-on-openshift)
   - [Introduction](#introduction)
   - [Prerequisities](#prerequisities)
-  - [Architecture](#architecture)
   - [Build Container Images](#build-container-images)
-    - [Pipeline Build](#pipeline-build)
-    - [Local Build](#local-build)
-  - [SRIOV Config](#sriov-config)
+  - [Network Setup](#network-setup)
   - [Deploy the application](#deploy-the-application)
 <!-- TOC -->
 
@@ -27,14 +24,20 @@ This document describes how to build, install and run the Intel vCMTS reference 
   - Podman / Buildah (for local build only)
   - Helm 3 (for local build only)
 
-## Architecture
+## Build Container Images
+They are two ways to build the vCMTS related applications, please see [build options](build/README.md).
 
+## Network Setup
 
-## SRIOV Config
-
-### Resource pools
+#### SRIOV Resource pools
 
 We need to split virtual functions (VFs) from the same physical function (PF) into multiple resource pools in order to segragate and dedicate traffic per VF for Upstream and Downstream.
+
+Each PF is divided into 8 VFs:
+- pair VFs are be for upstream traffic
+- odd VFs are for downstream traffic
+
+Find the manifest in the [config/sriov folder](config/sriov).
 
 ## Deploy the application
 

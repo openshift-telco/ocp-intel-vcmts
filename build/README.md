@@ -1,6 +1,13 @@
 ## Build Container Images
 
+You can either build the vCMTS related container manually or using a Tekton pipeline.
+
 ### Pipeline Build
+
+Prerequisite:
+- have the vCMTS artifacts available by URL so the pipeline can retrieve them.
+
+If you need to host the vCMTS artifact in an HTTP server, the [httpd](httpd) folder contain the necessary manifests and documentation to do so.
 
 #### OpenShift Pipeline
 
