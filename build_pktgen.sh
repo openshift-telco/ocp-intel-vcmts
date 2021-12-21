@@ -26,7 +26,7 @@ echo -e "Copy Intel VCMTS fixedsz traffic policies"
 cp intel-vcmtsd-fixedsz-tp-${VCMTS_VERSION}.tar.bz2 ${VCMTS_ROOT}/vcmts/traffic-policies
 
 # add Red Hat Containerfile
-cp patches/pktgen-Dockerfile.RedHat ${VCMTS_ROOT}/vcmts/pktgen/container/Containerfile.ubi8
+cp patches/pktgen-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/pktgen/container/Containerfile.ubi8
 
 # apply fork and exports build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
