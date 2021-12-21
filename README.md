@@ -186,24 +186,6 @@ $ . build_config
 $ ./build_vcmts.sh
 ```
 
-Wait until the script finishes and container is commited to the specified repository.
-
-```
-...
-Copying blob 657d43ff9b17 done  
-Copying config 7ee089cfa5 done  
-Writing manifest to image destination
-Storing signatures
-7ee089cfa5b61f58817b4b9c3b9e5e2f7bc5f5ca581cfa00ece671f2077a17b9
-```
-
-Verify image exists.
-
-```
-$ podman images | grep vcmts
-localhost/vcmts                                        latest       7ee089cfa5b6  50 seconds ago  259 MB
-```
-
 #### Pktgen
 
 Launch build script.
@@ -211,14 +193,6 @@ Launch build script.
 ```
 $ . build_config
 $ ./build_pktgen.sh
-```
-
-Wait until the script finishes and container is commited to local storage.
-Verify image exists
-
-```
-$ podman images | grep pktgen
-localhost/vcmts-pktgen                                        latest       6e52dc9b5abe  50 seconds ago  2.14 GB
 ```
 
 ## SRIOV Config
