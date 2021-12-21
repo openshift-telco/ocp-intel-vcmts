@@ -24,7 +24,7 @@ cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
 tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
 # add Red Hat Containerfile
-cp patches/vcmts-Dockerfile.RedHat ${VCMTS_ROOT}/vcmts/src/app/vcmtsd/container/Dockerfile.RedHat
+cp patches/vcmts-Dockerfile.RedHat ${VCMTS_ROOT}/vcmts/src/app/vcmtsd/container/Containerfile.ubi8
 
 # apply fork and exports build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
