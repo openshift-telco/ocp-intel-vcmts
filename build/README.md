@@ -2,6 +2,11 @@
 
 You can either build the vCMTS related container manually or using a Tekton pipeline.
 
+<!-- TOC -->
+- [Pipeline Build](#pipeline-build)
+- [Local Build](#local-build)
+<!-- TOC -->
+
 ### Pipeline Build
 
 Prerequisite:
