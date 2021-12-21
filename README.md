@@ -88,15 +88,23 @@ $ oc create -f pipeline/tasks/get-vcmts-archive.yaml
 The pipeline supports the following parameters, with their according default value.
 Cuztomize as needed.
 
-    - default: 'http-server.vcmts-build:8080'
-      name: HTTP_SERVER
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-v21-10-0.tar.gz
+      description: URL to the Intel vCMTS package
+      name: VCMTSD_PACKAGE_URL
       type: string
     - default: 21.10.0
       description: Intel VCMTS package version
       name: VCMTS_VERSION
       type: string
     - default: 'image-registry.openshift-image-registry.svc:5000'
+      description: Container Registry where to save the images
       name: REGISTRY_URL
+      type: string
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-fixedsz-tp-21.10.0.tar.bz2
+      description: 'URL to Intel vCMTS fixedsz traffic policies '
+      name: VCMTSD_FIXEDSZ_TP_URL
       type: string
 
 
