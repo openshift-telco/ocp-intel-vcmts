@@ -20,7 +20,7 @@ spec:
       type: string
     - default: >-
         https://01.org/sites/default/files/downloads/intel-vcmtsd-fixedsz-tp-21.10.0.tar.bz2
-      description: 'URL to Intel vCMTS fixedsz traffic policies'
+      description: 'URL to Intel vCMTS fixedsz traffic policies '
       name: VCMTSD_FIXEDSZ_TP_URL
       type: string
   tasks:
@@ -57,6 +57,8 @@ spec:
           value: $(params.VCMTSD_PACKAGE_URL)
         - name: VCMTSD_FIXEDSZ_TP_URL
           value: $(params.VCMTSD_FIXEDSZ_TP_URL)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
       runAfter:
         - git-clone
       taskRef:
