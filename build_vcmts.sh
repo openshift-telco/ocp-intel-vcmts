@@ -12,7 +12,7 @@ set -o errexit
 # Set envs
 IS_RHEL_BUILD=y
 VCMTSD_HOST=y
-IMAGE_NAME=${REGISTRY_URL}/vcmts
+IMAGE_NAME=${REGISTRY_URL}/vcmts-d
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
 VCMTS_ROOT="/usr/src/vcmts"
 MYHOME=${VCMTS_ROOT}
@@ -46,8 +46,11 @@ pip3 install pyelftools
 dnf clean all
 rm -fr /var/cache/dnf
 
-# install_power_mgmt_utilities
-# install_qat_drivers
+echo -e "Install Power Management Utilities"
+install_power_mgmt_utilities
+
+echo -e "Install QAT drivers"
+install_qat_drivers
 
 echo -e "Install Intel IPSec MB Library"
 build_baremetal_ipsec_mb
@@ -59,6 +62,10 @@ build_baremetal_dpdk
 
 echo -e "Generate certificates for vCMTS"
 generate_openssl_certs
+
+echo -e "Copy helper scripts"
+mkdir ${VCMTS_ROOT/src/app/vcmtsd/container/vmcts-config
+cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT/src/app/vcmtsd/container/vmcts-config
 
 echo -e "Build vCMTS-D"
 sed -e "s#/usr/lib/pkgconfig/libcollectdclient.pc#/usr/lib64/pkgconfig/libcollectdclient.pc#g" -i ${VCMTS_ROOT}/src/app/vcmtsd/Makefile

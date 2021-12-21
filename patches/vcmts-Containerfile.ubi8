@@ -29,6 +29,10 @@ USER root
 COPY lib/libIPSec_MB* /usr/lib/
 RUN ldconfig
 
+# Config
+RUN mkdir /home/vcmts/vcmts-config
+COPY vcmts-config/*.sh /home/vcmts/vcmts-config/
+
 # vCMTS-D
 COPY ./vcmts-d /home/vcmts/vcmts-d
 COPY config /home/vcmts/.

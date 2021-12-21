@@ -27,6 +27,10 @@ RUN useradd -s /bin/bash -d /home/vcmts/ -m -u 1999 vcmts
 WORKDIR /home/vcmts
 USER root
 
+# Config
+RUN mkdir /home/vcmts/pktgen-config
+COPY vcmts-config/*.sh /home/vcmts/pktgen-config/
+
 RUN mkdir /home/vcmts/pcaps
 COPY setup.pkt /home/vcmts/pcaps/
 COPY ./pcaps/* /home/vcmts/pcaps/
