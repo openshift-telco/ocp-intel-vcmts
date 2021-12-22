@@ -51,7 +51,7 @@ rm -fr /var/cache/dnf
 
 echo -e "Copy helper scripts"
 mkdir ${VCMTS_ROOT}/pktgen/container/pktgen-config
-cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT/pktgen/container/pktgen-config
+cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT}/pktgen/container/pktgen-config
 
 echo -e "Build DPDK"
 build_baremetal_dpdk
