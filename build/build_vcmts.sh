@@ -50,7 +50,8 @@ echo -e "Install Power Management Utilities"
 install_power_mgmt_utilities
 
 echo -e "Install QAT drivers"
-install_qat_drivers
+# install_qat_drivers
+# fail with     Kernel sources /lib/modules/4.18.0-305.25.1.el8_4.x86_64/build not found.
 
 echo -e "Install Intel IPSec MB Library"
 build_baremetal_ipsec_mb
