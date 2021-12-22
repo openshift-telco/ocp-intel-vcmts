@@ -5,16 +5,9 @@ LABEL maintainer="Intel Corporation"
 LABEL com.redhat.component="ubi8-container" \
       name="platform-management-tool" \
       version="${VCMTS_VERSION}"
-
-#label for EULA
-LABEL com.redhat.license_terms=""
-
-#labels for container catalog
 LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS Platform Management Tool."
-LABEL description=""
 LABEL io.k8s.display-name="Intel vCMTS ${VCMTS_VERSION} Platform Management Tool."
-LABEL io.openshift.expose-services=""
-LABEL io.openshift.tags="vcmts"
+LABEL io.openshift.tags="vcmts-platform-management-tool"
 
 RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager python39 python39-pip
 

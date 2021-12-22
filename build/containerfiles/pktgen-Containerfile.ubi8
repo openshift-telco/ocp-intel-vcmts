@@ -5,15 +5,8 @@ LABEL maintainer="Intel Corporation"
 LABEL com.redhat.component="ubi8-container" \
       name="vcmts-pktgen" \
       version="${VCMTS_VERSION}"
-
-#label for EULA
-LABEL com.redhat.license_terms=""
-
-#labels for container catalog
 LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS Packet Generator."
-LABEL description=""
 LABEL io.k8s.display-name="Intel vCMTS Packet Generator ${VCMTS_VERSION}"
-LABEL io.openshift.expose-services=""
 LABEL io.openshift.tags="vcmts pktgen"
 
 RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager \ 

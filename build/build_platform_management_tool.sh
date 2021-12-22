@@ -19,7 +19,7 @@ mkdir -p ${VCMTS_ROOT}
 cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
 tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
-cp patches/manager-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/tools/vcmts-pm/Containerfile.ubi8
+cp patches/platform-management-tool-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/tools/vcmts-pm/Containerfile.ubi8
 cd ${VCMTS_ROOT}/vcmts/tools/vcmts-pm
 
 buildah --storage-driver vfs bud --build-arg VCMTS_VERSION=$VCMTS_VERSION -t ${IMAGE_TAG} Containerfile.ubi8
