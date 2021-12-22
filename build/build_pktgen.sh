@@ -28,7 +28,7 @@ cp intel-vcmtsd-fixedsz-tp-${VCMTS_VERSION}.tar.bz2 ${VCMTS_ROOT}/vcmts/traffic-
 # add Red Hat Containerfile
 cp containerfiles/pktgen-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/pktgen/container/Containerfile.ubi8
 
-# apply fork and exports build functions
+# apply fork and export build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 cp patches/env.sh ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh

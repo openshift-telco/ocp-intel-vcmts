@@ -26,7 +26,7 @@ tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 # add Red Hat Containerfile
 cp containerfiles/vcmts-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/src/app/vcmtsd/container/Containerfile.ubi8
 
-# apply fork and exports build functions
+# apply fork and export build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 cp patches/env.sh ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh

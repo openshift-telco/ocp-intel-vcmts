@@ -26,7 +26,7 @@ tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 # add Red Hat Containerfile
 cp containerfiles/us-shed-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/src/app/us-sched/container/Containerfile.ubi8
 
-# apply fork and exports build functions
+# apply fork and export build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 cp patches/env.sh ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
@@ -52,8 +52,8 @@ cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT}/src/app/us-sched/container/u
 
 echo -e "Install Intel IPSec MB Library"
 build_baremetal_ipsec_mb
-mkdir ${VCMTS_ROOT}/src/app/vcmtsd/container/lib
-cp /usr/lib/libIPSec_MB* ${VCMTS_ROOT}/src/app/vcmtsd/container/lib
+mkdir ${VCMTS_ROOT}/src/app/us-sched/container/lib
+cp /usr/lib/libIPSec_MB* ${VCMTS_ROOT}/src/app/us-sched/container/lib
 
 echo -e "Build US Sched"
 build_container_us_sched

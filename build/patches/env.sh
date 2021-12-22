@@ -755,11 +755,18 @@ function build_container_power_mgr {
 
 	DIR=$PWD
 
-	cd /usr/src/dpdk-$DPDK_VERSION/examples/vm_power_manager
-	_build_power_mgr
+    # CHANGE FROM REDHAT
+	if [ "${IS_RHEL}" -eq 1 ]; then
+		build_baremetal_power_mgr
+		cp $MYHOME/dpdk/examples/vm_power_manager/build/vm_power_mgr container/.
+    else
+		cd /usr/src/dpdk-$DPDK_VERSION/examples/vm_power_manager
+		_build_power_mgr
+		cp /usr/src/dpdk-$DPDK_VERSION/examples/vm_power_manager/build/vm_power_mgr container/.
+	fi
 
 	cd ${VCMTS_ROOT}/power-mgr
-	cp /usr/src/dpdk-$DPDK_VERSION/examples/vm_power_manager/build/vm_power_mgr container/.
+	
 	build container vcmts-power-mgr
 	rm -f container/vm_power_mgr
 	cd $DIR
