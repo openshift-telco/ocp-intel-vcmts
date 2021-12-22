@@ -29,7 +29,8 @@ USER root
 
 # Config
 RUN mkdir /home/vcmts/pktgen-config
-COPY vcmts-config/*.sh /home/vcmts/pktgen-config/
+COPY pktgen-config/*.sh /home/vcmts/pktgen-config/
+RUN chmod +x /home/vcmts/pktgen-config/*
 
 RUN mkdir /home/vcmts/pcaps
 COPY setup.pkt /home/vcmts/pcaps/

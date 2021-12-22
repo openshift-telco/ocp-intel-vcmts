@@ -32,6 +32,7 @@ RUN ldconfig
 # Config
 RUN mkdir /home/vcmts/vcmts-config
 COPY vcmts-config/*.sh /home/vcmts/vcmts-config/
+RUN chmod +x /home/vcmts/vcmts-config/*
 
 # vCMTS-D
 COPY ./vcmts-d /home/vcmts/vcmts-d

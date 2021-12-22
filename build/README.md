@@ -7,12 +7,16 @@ You can either build the vCMTS related container manually or using a Tekton pipe
 - [Local Build](#local-build)
 <!-- TOC -->
 
+Clone this repository.
+
+```
+$ git clone https://github.com/openshift-telco/ocp-intel-cvmts
+```
+
 ### Pipeline Build
 
-Prerequisite:
-- have the vCMTS artifacts available by URL so the pipeline can retrieve them.
-
-If you need to host the vCMTS artifact in an HTTP server, the [httpd](httpd) folder contain the necessary manifests and documentation to do so.
+Acquire Intel vCMTS packages and/or have it available through URLs.
+If you need to host the vCMTS artifacts in an HTTP server, the [httpd](httpd) folder contain the necessary manifests and documentation to do so.
 
 #### OpenShift Pipeline
 
@@ -37,8 +41,10 @@ $ oc create -f pipeline/github-auth-secret_EXAMPLE.yaml
 
 ##### Authentication to internal image registry
 
+Provide the `pipeline` ServiceAccount with the `registry-editor` role.
+
 ~~~
-oc policy add-role-to-user registry-editor -z pipeline -n vcmts-build
+$ oc policy add-role-to-user registry-editor -z pipeline -n vcmts-build
 ~~~
 
 ##### Pipeline share workspace
@@ -46,7 +52,7 @@ oc policy add-role-to-user registry-editor -z pipeline -n vcmts-build
 In order to pass data between the pipeline tasks, a shared workspace is setup.
 
 ~~~
-oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
+$ oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
 ~~~
 
 ##### Pipeline tasks
@@ -67,7 +73,7 @@ $ oc create -f pipeline/tasks/get-vcmts-archive.yaml
 ##### Pipeline
 
 The pipeline supports the following parameters, with their according default value.
-Cuztomize as needed.
+Customize as needed.
 
     - default: >-
         https://01.org/sites/default/files/downloads/intel-vcmtsd-v21-10-0.tar.gz
@@ -114,13 +120,7 @@ vcmts-pktgen   default-route-openshift-image-registry.apps.npgcable.intel.com/vc
 
 ### Local Build
 
-Clone this repository.
-
-```
-$ git clone https://github.com/openshift-telco/ocp-intel-cvmts
-```
-
-Acquire Intel vCMTS package and copy to `ocp-intel-vcmts` directory. 
+Acquire Intel vCMTS package and copy to `ocp-intel-vcmts/build` directory. 
 Example package: `intel-vcmtsd-v21-10-0-beta.tar.gz`.
 Edit `build_config` and adjust as needed according to required build versions. Example:
 
