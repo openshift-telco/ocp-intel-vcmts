@@ -19,7 +19,7 @@ MYHOME=${VCMTS_ROOT}
 export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig
 
 # Check if image already exist
-buildah pull $IMAGE_TAG >/dev/null 2>&1
+buildah pull $IMAGE_TAG || true
 EXISTS=`buildah inspect $IMAGE_TAG >/dev/null 2>&1 && echo yes || echo no`
 if [[ $EXISTS == yes ]]; then
     exit 0
