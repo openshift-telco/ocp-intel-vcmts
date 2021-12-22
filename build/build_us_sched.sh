@@ -55,6 +55,9 @@ build_baremetal_ipsec_mb
 mkdir ${VCMTS_ROOT}/src/app/us-sched/container/lib
 cp /usr/lib/libIPSec_MB* ${VCMTS_ROOT}/src/app/us-sched/container/lib
 
+echo -e "Build patched dpdk ${DPDK_VERSION}"
+build_baremetal_dpdk
+
 echo -e "Build US Sched"
 build_container_us_sched
 
