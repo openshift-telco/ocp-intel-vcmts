@@ -65,8 +65,8 @@ echo -e "Generate certificates for vCMTS"
 generate_openssl_certs
 
 echo -e "Copy helper scripts"
-mkdir ${VCMTS_ROOT}/src/app/vcmtsd/container/vmcts-config
-cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT}/src/app/vcmtsd/container/vmcts-config
+mkdir ${VCMTS_ROOT}/src/app/vcmtsd/container/vcmts-config
+cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT}/src/app/vcmtsd/container/vcmts-config
 
 echo -e "Build vCMTS-D"
 sed -e "s#/usr/lib/pkgconfig/libcollectdclient.pc#/usr/lib64/pkgconfig/libcollectdclient.pc#g" -i ${VCMTS_ROOT}/src/app/vcmtsd/Makefile
