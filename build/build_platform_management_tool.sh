@@ -15,7 +15,7 @@ IMAGE_NAME=${REGISTRY_URL}/vcmts-platform-management-tool
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
 
 # Check if image already exist
-buildah pull $IMAGE_TAG
+buildah pull $IMAGE_TAG >/dev/null 2>&1
 EXISTS=`buildah inspect $IMAGE_TAG >/dev/null 2>&1 && echo yes || echo no`
 if [[ $EXISTS == yes ]]; then
     exit 0
