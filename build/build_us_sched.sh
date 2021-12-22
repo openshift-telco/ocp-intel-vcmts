@@ -24,11 +24,11 @@ cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
 tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
 # add Red Hat Containerfile
-cp patches/us-shed-Containerfile ${VCMTS_ROOT}/vcmts/src/app/us-sched/container/Containerfile.ubi8
+cp containerfiles/us-shed-Containerfile ${VCMTS_ROOT}/vcmts/src/app/us-sched/container/Containerfile.ubi8
 
 # apply fork and exports build functions
 rm ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
-cp patches/fork/env.sh ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
+cp patches/env.sh ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 
 echo -e "Install packages and dependencies"
