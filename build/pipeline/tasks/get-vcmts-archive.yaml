@@ -21,10 +21,10 @@ spec:
 
 
         curl $(inputs.params.VCMTSD_PACKAGE_URL) -o
-        /workspace/output/intel-vcmtsd-v${DASH_VERSION}.tar.gz
+        /workspace/output/build/intel-vcmtsd-v${DASH_VERSION}.tar.gz
 
         curl $(inputs.params.VCMTSD_FIXEDSZ_TP_URL) -o
-        /workspace/output/intel-vcmtsd-fixedsz-tp-${DOTED_VERSION}.tar.bz2
+        /workspace/output/build/intel-vcmtsd-fixedsz-tp-${DOTED_VERSION}.tar.bz2
   workspaces:
     - description: Where to store the archive
       name: output

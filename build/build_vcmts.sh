@@ -20,8 +20,8 @@ export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig
 
 echo -e "Copy and uncompress Intel VCMTS package"
 mkdir -p ${VCMTS_ROOT}
-cp ../intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
-tar zxvf ../intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
+cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
+tar zxvf intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz -C ${VCMTS_ROOT}
 
 # add Red Hat Containerfile
 cp patches/vcmts-Containerfile.ubi8 ${VCMTS_ROOT}/vcmts/src/app/vcmtsd/container/Containerfile.ubi8
