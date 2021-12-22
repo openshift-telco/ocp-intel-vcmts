@@ -1,0 +1,154 @@
+{{- $root := . -}}
+{{- range $i,$v := until (int .Values.topology.vcmts_replicas) -}}
+{{- $pods := $root.Values.topology.vcmts_pods -}}
+{{- $pod := (index $pods $i) -}}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vcmtsd-{{- $pod.sg_id }}
+  annotations:
+    networks: '[
+        { "name": "flannel" }
+    ]'
+spec:
+  nodeSelector:
+    vcmts: "true"
+  securityContext:
+    fsGroup: 1999
+  containers:
+    - name: vcmtsd-{{- $pod.sg_id }}
+      image: {{$pod.vcmtsd_image}}
+      ports:
+      - containerPort: {{ $pod.tls_port }}
+        hostPort: {{ $pod.tls_port }}
+      env:
+      - name: SG_ID
+        value: "{{ $pod.sg_id }}"
+      - name: NUM_OFDM
+        value: "{{ $pod.num_ofdm }}"
+      - name: NUM_SUBS
+        value: "{{ $pod.num_subs }}"
+      - name: CM_CRYPTO
+        value: "{{ $pod.cm_crypto }}"
+      - name: AES_KEY_SIZE
+        value: "{{ $pod.aes_key_size }}"
+      - name: CRC
+        value: "{{ $pod.crc }}"
+      - name: LATENCY
+        value: "{{ $pod.latency }}"
+      - name: CYCLES
+        value: "{{ $pod.cycles }}"
+      - name: APP_STATS
+        value: "{{ $pod.app_stats }}"
+      - name: US_SCHED_ENABLED
+        value: "{{ $pod.us_sched_enabled }}"
+      - name: US_SCHED_ID
+        value: "{{ $pod.us_sched_id }}"
+      - name: POWER_MGMT
+        value: "{{ $pod.power_mgmt }}"
+      - name: TEMPLATE_CONFIG
+        value: "{{ $pod.template_config }}"
+      - name: SOCKET_MEM
+        value: "{{ $pod.socket_mem }}"
+      - name: SOCKET_LIM
+        value: "{{ $pod.socket_lim }}"
+      - name: CPU_SOCKET_ID
+        value: "{{ $pod.cpu_socket_id }}"
+      - name: CORE_CONFIG
+        value: "{{ $pod.core_config }}"
+      - name: NIC_PCIADDR_RPHY # change intel.com to openshift.io
+        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_{{ $pod.cpu_socket_id }}_US"
+      - name: NIC_OVERRIDE_RPHY
+        value: "{{ $pod.net_us }}"
+      - name: NIC_PCIADDR_NET # change intel.com to openshift.io
+        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_{{ $pod.cpu_socket_id }}_DS"
+      - name: NIC_OVERRIDE_NET
+        value: "{{ $pod.net_ds }}"
+      - name: QAT
+        value: "{{ $pod.qat }}"
+      - name: QAT_OVERRIDE
+        value: "{{ $pod.qat_pci }}"
+      command:
+      - "/bin/bash"
+      - "-c"
+      args: [ "sleep infinity" ] #[ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ]
+      resources:
+        requests:
+          memory: 200Mi
+          cpu: {{ $pod.num_lcores_required }}
+          hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_ds: '1' # change intel.com to openshift.io
+          {{ if $pod.qat }}
+          qat.intel.com/generic: '1'
+          {{ end }}
+        limits:
+          memory: 200Mi
+          cpu: {{ $pod.num_lcores_required }}
+          hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_ds: '1' # change intel.com to openshift.io
+          {{ if $pod.qat }}
+          qat.intel.com/generic: '1'
+          {{ end }}
+      lifecycle:
+        {{ if eq $pod.power_mgmt "time_of_day" }}
+        preStop:
+          exec:
+            command: [ "/bin/bash", "-c", "/tmp/power_policy_destroy.sh" ]
+        {{ end }}
+      volumeMounts:
+        - name: vcmtsd-configmap
+          mountPath: /home/vcmts/vcmts-config/run_vcmtsd.sh
+          subPath: run_vcmtsd.sh # use subPath as directory exist in container
+        - name: vcmtsd-configmap
+          mountPath: /home/vcmts/vcmts-config/power_policy_create.cfg
+          subPath: power_policy_create.cfg # use subPath as directory exist in container
+        - name: vcmtsd-configmap
+          mountPath: /home/vcmts/vcmts-config/power_policy_destroy.cfg
+          subPath: power_policy_destroy.cfg # use subPath as directory exist in container
+        - name: hugepages
+          mountPath: /hugepages
+          readOnly: false
+        - name: collectd
+          mountPath: /opt/collectd/var/run
+          readOnly: false
+        - name: sysfs
+          mountPath: /sys
+          readOnly: false
+        - name: sriov
+          mountPath: /sriov-cni
+          readOnly: false
+        - name: power-mgmt
+          mountPath: /opt/power_mgmt
+        # - name: ipsec
+        #   mountPath: /usr/lib/libIPSec_MB.so.1
+      securityContext:
+        privileged: true
+  volumes:
+    - name: vcmtsd-configmap
+      configMap:
+        name: vcmtsd-configmap
+        defaultMode: 0777
+    - name: hugepages
+      emptyDir:
+        medium: HugePages
+    - name: collectd
+      hostPath:
+        path: /var/run/collectd
+    - name: sysfs
+      hostPath:
+        path: /sys
+    - name: sriov
+      hostPath:
+        path: /var/lib/cni/sriov
+    - name: power-mgmt
+      hostPath:
+        path: /opt/power_mgmt
+    # - name: ipsec
+    #   hostPath:
+    #     path: /usr/lib/libIPSec_MB.so.1
+  restartPolicy: Never
+---
+{{- end -}}

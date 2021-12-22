@@ -1,0 +1,29 @@
+topology:
+  vcmts_replicas: 1
+  vcmts_pods:
+  - service_group_config:
+    cpu_socket_id: 0
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg # was /vcmts/vcmts-us1t_ds2t.cfg
+    socket_mem: 768,0
+    socket_lim: 896,0
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: no
+    cycles: no
+    app_stats: no
+    us_sched_enabled: false
+    us_sched_id: 0
+    sg_id: 0
+    net_us: 18:02.0
+    net_ds: 18:02.1
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8100
