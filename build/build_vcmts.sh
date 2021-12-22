@@ -18,6 +18,13 @@ VCMTS_ROOT="/usr/src/vcmts"
 MYHOME=${VCMTS_ROOT}
 export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig
 
+# Check if image already exist
+buildah pull $IMAGE_TAG
+EXISTS=`buildah inspect $IMAGE_TAG >/dev/null 2>&1 && echo yes || echo no`
+if [[ $EXISTS == yes ]]; then
+    exit 0
+fi
+
 echo -e "Copy and uncompress Intel VCMTS package"
 mkdir -p ${VCMTS_ROOT}
 cp intel-vcmtsd-v${VCMTS_VERSION//./-}.tar.gz ${VCMTS_ROOT}
