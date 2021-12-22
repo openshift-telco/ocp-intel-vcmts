@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-vcmts-archive
+  namespace: vcmts-build
+spec:
+  params:
+    - name: VCMTSD_PACKAGE_URL
+      type: string
+    - name: VCMTSD_FIXEDSZ_TP_URL
+      type: string
+    - name: VCMTS_VERSION
+      type: string
+  steps:
+    - image: registry.redhat.io/ubi7/ubi-minimal
+      name: get-packages
+      resources: {}
+      script: >
+        DOTED_VERSION=$(inputs.params.VCMTS_VERSION)
+        DASH_VERSION=${DOTED_VERSION//./-}
+
+
+        curl $(inputs.params.VCMTSD_PACKAGE_URL) -o
+        /workspace/output/build/intel-vcmtsd-v${DASH_VERSION}.tar.gz
+
+        curl $(inputs.params.VCMTSD_FIXEDSZ_TP_URL) -o
+        /workspace/output/build/intel-vcmtsd-fixedsz-tp-${DOTED_VERSION}.tar.bz2
+  workspaces:
+    - description: Where to store the archive
+      name: output

@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-container
+  namespace: vcmts-build
+spec:
+  params:
+    - name: SCRIPT_TO_EXECUTE
+      type: string
+    - name: REGISTRY_URL
+      type: string
+    - name: VCMTS_VERSION
+      type: string
+  steps:
+    - env:
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)
+      image: registry.redhat.io/rhel8/buildah
+      name: build
+      resources: {}
+      script: |
+        cd /workspace/input/build
+        ./$(inputs.params.SCRIPT_TO_EXECUTE)
+  workspaces:
+    - description: Getting the script from input
+      name: input

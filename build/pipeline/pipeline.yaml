@@ -1,0 +1,119 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: vcmts-build
+  namespace: vcmts-build
+spec:
+  params:
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-v21-10-0.tar.gz
+      description: URL to the Intel vCMTS package
+      name: VCMTSD_PACKAGE_URL
+      type: string
+    - default: 21.10.0
+      description: Intel VCMTS package version
+      name: VCMTS_VERSION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000'
+      description: Container Registry where to save the images
+      name: REGISTRY_URL
+      type: string
+    - default: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-fixedsz-tp-21.10.0.tar.bz2
+      description: 'URL to Intel vCMTS fixedsz traffic policies '
+      name: VCMTSD_FIXEDSZ_TP_URL
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: 'git@github.com:openshift-telco/ocp-intel-vcmts.git'
+        - name: revision
+          value: pipeline
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: deleteExisting
+          value: 'true'
+        - name: verbose
+          value: 'true'
+        - name: gitInitImage
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:da1aedf0b17f2b9dd2a46edc93ff1c0582989414b902a28cd79bad8a035c9ea4
+        - name: userHome
+          value: /tekton/home
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+    - name: get-vcmts-archive
+      params:
+        - name: VCMTSD_PACKAGE_URL
+          value: $(params.VCMTSD_PACKAGE_URL)
+        - name: VCMTSD_FIXEDSZ_TP_URL
+          value: $(params.VCMTSD_FIXEDSZ_TP_URL)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: get-vcmts-archive
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+    - name: build-vcmts
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_vcmts.sh
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+    - name: build-pktgen
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_pktgen.sh
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+    - name: build-platform-management-tool
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_platform_management_tool.sh
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+  workspaces:
+    - name: shared-workspace

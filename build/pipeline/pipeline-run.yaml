@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: vcmts-build-001
+  namespace: vcmts-build
+  labels:
+    tekton.dev/pipeline: vcmts-build
+spec:
+  params:
+    - name: VCMTSD_PACKAGE_URL
+      value: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-v21-10-0.tar.gz
+    - name: VCMTS_VERSION
+      value: 21.10.0
+    - name: REGISTRY_URL
+      value: 'image-registry.openshift-image-registry.svc:5000'
+    - name: VCMTSD_FIXEDSZ_TP_URL
+      value: >-
+        https://01.org/sites/default/files/downloads/intel-vcmtsd-fixedsz-tp-21.10.0.tar.bz2
+  pipelineRef:
+    name: vcmts-build
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: vcmts-build-workspace

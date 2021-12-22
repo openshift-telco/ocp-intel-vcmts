@@ -3,14 +3,11 @@
 ## Table of Contents
 
 <!-- TOC -->
-- [Intel vCMTS on OpenShift](#intel-vcmts-on-openshift)
-  - [Introduction](#introduction)
-  - [Prerequisities](#prerequisities)
-  - [Architecture](#architecture)
-  - [Build Container Images](#build-container-images)
-    - [vCMTS](#vcmts)
-    - [Pktgen](#pktgen)
-  - [Installation](#installation)
+- [Introduction](#introduction)
+- [Prerequisities](#prerequisities)
+- [Build Container Images](#build-container-images)
+- [Network Setup](#network-setup)
+- [Deploy the application](#deploy-the-application)
 <!-- TOC -->
 
 ## Introduction
@@ -19,81 +16,35 @@ This document describes how to build, install and run the Intel vCMTS reference 
 
 ## Prerequisities
 
-  - Red Hat OpenShift version 4.9
-  - Podman
-  - Buildah
-  - Helm3
   - Intel vCMTS Package
-
-## Architecture
+  - Red Hat OpenShift version 4.8.20
+  - Red Hat OpenShift Data Foundation
+  - Red Hat OpenShift Pipeline
+  - Podman / Buildah (for local build only)
+  - Helm 3 (for local build only)
 
 ## Build Container Images
+They are two ways to build the vCMTS related applications, please see [build options](build/README.md).
 
-Clone this repository.
+## Network Setup
 
-```
-$ git clone https://github.com/openshift-telco/ocp-intel-cvmts
-```
+#### SRIOV Resource pools
 
-Acquire Intel vCMTS package and copy to `ocp-intel-vcmts` directory. 
-Example package: `intel-vcmtsd-v21-10-0-beta.tar.gz`.
-Edit `build_config` and adjust as needed according to required build versions. Example:
+We need to split virtual functions (VFs) from the same physical function (PF) into multiple resource pools in order to segragate and dedicate traffic per VF for Upstream and Downstream.
 
-```
-$ cat build_config 
-# Intel VCMTS package version
-VCMTS_VERSION="21.10.0-beta"
-# Build directory
-VCMTS_ROOT="/usr/src/vcmts"
+Each PF is divided into 8 VFs:
+- pair VFs are be for upstream traffic
+- odd VFs are for downstream traffic
 
-# Change version with corresponding Intel VCMTS build requirements
-DPDK_VERSION="21.02"
-DPDK_VERSION_PKTGEN="20.08"
-IPSEC_MB_VERSION="0.55"
-COLLECTD_VERSION="5.12.0"
-PKTGEN_VERSION="19.10.0"
-GRAFANA_VERSION="7.2.0"
-PROMETHEUS_VERSION="2.0.0"
-```
+Find the manifest in the [config/sriov folder](config/sriov).
 
-### vCMTSD
+## Deploy the application
 
-Launch build script.
+TODO:
+  Create helm chart repository using static pages
 
-```
-$ ./build_vcmts.sh
-```
+#### vCMTS-D
 
-Wait until the script finishes and container is commited to local storage.
-
-```
-...
-Copying blob 657d43ff9b17 done  
-Copying config 7ee089cfa5 done  
-Writing manifest to image destination
-Storing signatures
-7ee089cfa5b61f58817b4b9c3b9e5e2f7bc5f5ca581cfa00ece671f2077a17b9
-```
-
-Verify image exists.
-
-```
-$ podman images | grep vcmts
-localhost/vcmts                                        latest       7ee089cfa5b6  50 seconds ago  259 MB
-```
-
-### Pktgen
-
-Launch build script.
-
-```
-$ ./build_pktgen.sh
-```
-
-Wait until the script finishes and container is commited to local storage.
-Verify image exists
-
-```
-$ podman images | grep pktgen
-localhost/vcmts-pktgen                                        latest       6e52dc9b5abe  50 seconds ago  2.14 GB
-```
+~~~
+helm install vcmts . -n vcmts-build
+~~~

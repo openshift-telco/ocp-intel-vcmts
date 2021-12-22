@@ -1,0 +1,4 @@
+# Intel VCMTS package version
+VCMTS_VERSION="21.10.0"
+# Registry to use to store the built image
+REGISTRY_URL="localhost"

@@ -1,0 +1,32 @@
+FROM registry.access.redhat.com/ubi8/ubi
+
+LABEL maintainer="Intel Corporation"
+
+LABEL com.redhat.component="ubi8-container" \
+      name="vcmts-pktgen" \
+      version="${VCMTS_VERSION}"
+LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS Packet Generator."
+LABEL io.k8s.display-name="Intel vCMTS Packet Generator ${VCMTS_VERSION}"
+LABEL io.openshift.tags="vcmts pktgen"
+
+RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager \ 
+  git gcc-c++ gcc cmake make automake autoconf libtool \
+  http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/libpcap-devel-1.9.1-5.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/lua-devel-5.3.4-12.el8.x86_64.rpm \
+  libpcap http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-11.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-devel-2.0.12-11.el8.x86_64.rpm
+
+RUN useradd -s /bin/bash -d /home/vcmts/ -m -u 1999 vcmts
+WORKDIR /home/vcmts
+USER root
+
+# Config
+RUN mkdir /home/vcmts/pktgen-config
+COPY pktgen-config/*.sh /home/vcmts/pktgen-config/
+RUN chmod +x /home/vcmts/pktgen-config/*
+
+RUN mkdir /home/vcmts/pcaps
+COPY setup.pkt /home/vcmts/pcaps/
+COPY ./pcaps/* /home/vcmts/pcaps/
+COPY pktgen /home/vcmts/pktgen
+RUN chmod +x /home/vcmts/*

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vcmtsd-configmap
+data:
+{{ (.Files.Glob "resources/*").AsConfig | indent 2 }}
+
