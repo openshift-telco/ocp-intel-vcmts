@@ -1,25 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: vcmts-platform-management-tool
+  labels:
+    app: vcmts-platform-management-tool
   namespace: vcmts-build
 spec:
-  selector:
-    matchLabels:
-      app: vcmts-platform-management-tool
-  replicas: 1
-  securityContext:
-    runAsUser: 1999
-    runAsGroup: 1999
-    fsGroup: 1999
-  template:
-    metadata:
-      labels:
-        app: vcmts-platform-management-tool
-    spec:
-      containers:
-        - name: vcmts-platform-management-tool
-          image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-platform-management-tool:21.10.0
-          command: ["/bin/sh"]
-          args: ["-c", "sleep infinity"]
-          imagePullPolicy: Always
+  containers:
+    - name: vcmts-platform-management-tool
+      image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-platform-management-tool:21.10.0
+      command: ["/bin/sh"]
+      args: ["-c", "sleep infinity"]
+      imagePullPolicy: Always
+  serviceAccount: pipeline
