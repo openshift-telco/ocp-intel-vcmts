@@ -28,7 +28,9 @@ They are two ways to build the vCMTS related applications, please see [build opt
 
 ## Network Setup
 
-This is stil TDB
+This is stil TDB.
+
+Interfaces grayed-out are up, others are down.
 
 ![High level](docs/vcmts-intel-lab.png)
 
