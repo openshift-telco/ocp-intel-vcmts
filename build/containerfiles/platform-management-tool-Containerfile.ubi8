@@ -19,3 +19,5 @@ COPY *.py /home/vcmts/platform-management-tool/
 WORKDIR /home/vcmts/platform-management-tool/
 
 RUN pip3 install -e .
+
+ENV PATH=$PATH:/home/vcmts/.local/bin/
