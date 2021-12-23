@@ -33,7 +33,7 @@ They are two ways to build the vCMTS related applications, please see [build opt
 We need to split virtual functions (VFs) from the same physical function (PF) into multiple resource pools in order to segragate and dedicate traffic per VF for Upstream and Downstream.
 
 Each PF is divided into 8 VFs:
-- pair VFs are be for upstream traffic
+- even VFs are be for upstream traffic
 - odd VFs are for downstream traffic
 
 Find the manifest in the [config/sriov folder](config/sriov).

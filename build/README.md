@@ -120,32 +120,31 @@ vcmts-pktgen   default-route-openshift-image-registry.apps.npgcable.intel.com/vc
 
 ### Local Build
 
-Acquire Intel vCMTS package and copy to `ocp-intel-vcmts/build` directory. 
-Example package: `intel-vcmtsd-v21-10-0-beta.tar.gz`.
-Edit `build_config` and adjust as needed according to required build versions. Example:
+In order to build locally, we will use the `rhel/buildah` container image, in order to make the build self-contained, not requiring any dependency, beside buildah.
 
-```
-$ cat build_config 
-# Intel VCMTS package version
-VCMTS_VERSION="21.10.0"
-# Registry to use to store the built image
-REGISTRY_URL="localhost"
-```
+Here are the steps to build locally:
 
-#### vCMTSD
+1. Acquire Intel vCMTS package and copy to `ocp-intel-vcmts/build` directory. 
+  Example package: `intel-vcmtsd-v21-10-0-beta.tar.gz`.
 
-Launch build script.
+2. Edit `build_config` and adjust as needed according to required build versions. Example:
+    ```
+    $ cat build_config 
+    # Intel VCMTS package version
+    VCMTS_VERSION="21.10.0"
+    # Registry to use to store the built image
+    REGISTRY_URL="localhost"
+    ```
 
-```
-$ . build_config
-$ ./build_vcmts.sh
-```
+3. Create a local container that will be the build node, and mount the git repo containing the vCMTS archive
+    ```
+    podman run -it --mount type=bind,source=ocp-intel-vcmts,target=/ocp-intel-vcmts registry.redhat.io/rhel8/buildah
+    ```
 
-#### Pktgen
-
-Launch build script.
-
-```
-$ . build_config
-$ ./build_pktgen.sh
-```
+4. Build a container
+    - uncomment in the build_$COMPONENT.sh the `source build_config` - line 10
+    - run the script to build the component of choice.
+      Example: 
+      ```
+      $ ./build_vcmts.sh
+      ```
