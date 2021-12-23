@@ -18,7 +18,4 @@ RUN mkdir /home/vcmts/platform-management-tool
 COPY *.py /home/vcmts/platform-management-tool/
 WORKDIR /home/vcmts/platform-management-tool/
 
-RUN pip3 install virtualenv
-RUN python3 -m virtualenv env
-RUN source env/bin/activate
 RUN pip3 install -e .
