@@ -1,0 +1,26 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: pktgen-ds
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: vfio-pci
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    deviceID: '1592'
+    pfNames:
+      - 'ens785f0#1-1'
+      - 'ens785f0#3-3'
+      - 'ens785f0#5-5'
+      - 'ens785f0#7-7'
+      - 'ens785f1#1-1'
+      - 'ens785f1#3-3'
+      - 'ens785f1#5-5'
+      - 'ens785f1#7-7'
+    vendor: '8086'
+  nodeSelector:
+    node-role.kubernetes.io/pktgen: ''
+  numVfs: 8
+  priority: 99
+  resourceName: vcmts_nw_vf_socket_0_ds

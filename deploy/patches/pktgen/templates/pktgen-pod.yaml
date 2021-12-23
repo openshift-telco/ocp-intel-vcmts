@@ -1,0 +1,91 @@
+{{- $root := . -}}
+{{- range $i,$v := until (int .Values.topology.pktgen_replicas) -}}
+{{- $pods := $root.Values.topology.pktgen_pods -}}
+{{- $images := $root.Values.images -}}
+{{- $pod := (index $pods $i) -}}
+{{- $ports := $pod.ports -}}
+{{- $port_0 := (index $pod.ports 0) -}}
+{{- $port_1 := (index $pod.ports 1) -}}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vcmts-pktgen-pod-{{- $pod.pktgen_id }}
+  labels:
+    name: pktgen
+  annotations: # use sriov networks
+     k8s.v1.cni.cncf.io/networks: '[
+        { "name": "pktgen-ds" },
+        {"name": "pktgen-us"}
+    ]'
+spec:
+  nodeSelector:
+    vcmtspktgen: "true"
+  containers:
+    - name: vcmts-pktgen-pod-{{- $pod.pktgen_id }}
+      tty: true
+      stdin: true
+      image: {{$images.vcmts_pktgen}}
+      env:
+      - name: LUA_PATH  
+        value: "/home/vcmts/Pktgen.lua"
+      - name: PKTGEN_ID
+        value: "{{$pod.pktgen_id}}"
+      - name: NUM_SOCKETS
+        value: "{{$pod.num_sockets}}"
+      - name: CPU_SOCKET_ID
+        value: "{{$pod.cpu_socket_id}}"
+      - name: OVERRIDE_PCIADDR_0
+        value: "{{$port_0.net_pktgen}}"
+      - name: OVERRIDE_PCIADDR_1
+        value: "{{$port_1.net_pktgen}}"
+      - name: PCAP_0
+        value: "us_cable-{{$port_0.traffic_type}}_{{$port_0.num_subs}}cms_{{$port_0.num_ofdm}}ofdm.pcap"
+      - name: PCAP_1
+        value: "ds_cable-{{$port_1.traffic_type}}_{{$port_1.num_subs}}cms_{{$port_1.num_ofdm}}ofdm.pcap"
+      command:
+      - "/bin/bash"
+      - "-c"
+      args:  [ "sleep infinity" ] #[ "/home/vcmts/pktgen-config/run_pktgen.sh" ]
+      resources:
+        requests:
+          memory: 200Mi 
+          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_us: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_ds: '1' # change intel.com to openshift.io
+          hugepages-{{$pod.hpg_sz}}: 3Gi
+        limits:
+          memory: 200Mi 
+          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_us: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_ds: '1' # change intel.com to openshift.io
+          hugepages-{{$pod.hpg_sz}}: 3Gi
+      volumeMounts:
+        - name: sysfs
+          mountPath: /sys
+          readOnly: false   
+        - name: hugepages
+          mountPath: /hugepages
+          readOnly: false
+        - name: pktgen-config
+          mountPath: /home/vcmts/pktgen-config/run_pktgen.sh
+          subPath: run_pktgen.sh # use subPath as directory exist in container
+        - name: dpdk
+          mountPath: /usr/local/lib/x86_64-linux-gnu
+      securityContext:
+        privileged: true
+  volumes:
+    - name: sysfs
+      hostPath:
+        path: /sys
+    - name: hugepages
+      emptyDir:
+        medium: HugePages
+    - name: pktgen-config
+      configMap:
+        name: pktgen-configmap
+        defaultMode: 0777
+    - name: dpdk
+      hostPath:
+        path: /usr/local/lib/x86_64-linux-gnu
+  restartPolicy: Never
+---
+{{- end -}}

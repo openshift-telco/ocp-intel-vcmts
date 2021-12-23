@@ -1,8 +1,1 @@
-# vcmts chart
-
-#### `run_vcmstd.sh`
-- line 116: `us_sched_ip_addr` do you need the IP address or DNS name is fine?
-
-
-#### `vcmtsd-pod.yaml`
-- many edits
+Doesn't work yet - should be used to configured host interface to enable traffic between vcmts and pktgen server

@@ -28,6 +28,10 @@ They are two ways to build the vCMTS related applications, please see [build opt
 
 ## Network Setup
 
+This is stil TDB
+
+![High level](docs/vcmts-intel-lab.png)
+
 #### SRIOV Resource pools
 
 We need to split virtual functions (VFs) from the same physical function (PF) into multiple resource pools in order to segragate and dedicate traffic per VF for Upstream and Downstream.
@@ -47,4 +51,12 @@ TODO:
 
 ~~~
 helm install vcmts . -n vcmts-build
+helm uninstall vcmts -n vcmts-build
+~~~
+
+#### pktgen
+
+~~~
+helm install pktgen . -n vcmts-build
+helm uninstall pktgen -n vcmts-build
 ~~~

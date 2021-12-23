@@ -1,0 +1,19 @@
+apiVersion: nmstate.io/v1beta1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ens785f1
+spec:
+  nodeSelector: 
+    node-role.kubernetes.io/vcmts: ''
+  desiredState:
+    interfaces:
+      - name: ens785f1
+        description: Interface for LAN connectivity in to pktgen
+        type: ethernet
+        state: up
+        ipv4:
+          address:
+          - ip: 192.168.1.1
+            prefix-length: 24
+          dhcp: false
+          enabled: true

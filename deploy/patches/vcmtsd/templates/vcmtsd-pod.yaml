@@ -7,9 +7,10 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: vcmtsd-{{- $pod.sg_id }}
-  annotations:
-    networks: '[
-        { "name": "flannel" }
+  annotations: # use sriov networks
+     k8s.v1.cni.cncf.io/networks: '[
+        { "name": "vcmts-ds" },
+        {"name": "vcmts-us"}
     ]'
 spec:
   nodeSelector:
