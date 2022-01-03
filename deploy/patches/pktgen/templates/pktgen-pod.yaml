@@ -66,10 +66,13 @@ spec:
           mountPath: /hugepages
           readOnly: false
         - name: pktgen-config
+          mountPath: /home/vcmts/pktgen-config/pktgen-host-config.sh
+          subPath: pktgen-host-config.sh
+        - name: pktgen-config
           mountPath: /home/vcmts/pktgen-config/run_pktgen.sh
           subPath: run_pktgen.sh # use subPath as directory exist in container
-        - name: dpdk
-          mountPath: /usr/local/lib/x86_64-linux-gnu
+        # - name: dpdk
+        #   mountPath: /usr/local/lib/x86_64-linux-gnu
       securityContext:
         privileged: true
   volumes:
@@ -83,9 +86,9 @@ spec:
       configMap:
         name: pktgen-configmap
         defaultMode: 0777
-    - name: dpdk
-      hostPath:
-        path: /usr/local/lib/x86_64-linux-gnu
+    # - name: dpdk
+    #   hostPath:
+    #     path: /usr/local/lib/x86_64-linux-gnu
   restartPolicy: Never
 ---
 {{- end -}}

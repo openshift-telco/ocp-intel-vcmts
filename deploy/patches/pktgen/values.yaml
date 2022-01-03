@@ -12,9 +12,9 @@ topology:
       traffic_type: imix2
       num_ofdm: 6
       num_subs: 300
-      net_pktgen: 05:02.0
+      # net_pktgen: 05:02.0
     - port_1:
       traffic_type: imix2
       num_ofdm: 6
       num_subs: 300
-      net_pktgen: 05:02.1
+      # net_pktgen: 05:02.1

@@ -9,7 +9,7 @@ metadata:
   name: vcmtsd-{{- $pod.sg_id }}
   annotations: # use sriov networks
      k8s.v1.cni.cncf.io/networks: '[
-        { "name": "vcmts-ds" },
+        { "name": "vcmts-ds"},
         {"name": "vcmts-us"}
     ]'
 spec:
@@ -125,8 +125,11 @@ spec:
           mountPath: /opt/power_mgmt
         # - name: ipsec
         #   mountPath: /usr/lib/libIPSec_MB.so.1
+      # securityContext:
+      #   privileged: true
       securityContext:
-        privileged: true
+        capabilities:
+          add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
     - name: vcmtsd-configmap
       configMap:

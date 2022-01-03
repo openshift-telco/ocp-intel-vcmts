@@ -1,4 +1,4 @@
-# vcmts chart
+# Charts
 
 Labels are define as follow in repsective pod:
     vcmtspktgen=true
@@ -14,8 +14,13 @@ Labels are define as follow in repsective pod:
 - remove hardcoded namespace
 
 #### `*-pod.yaml`
-- use respective us/ds sriov networks
+- use respective us/ds sriov networks and define ip addr
 - change intel.com to openshift.io
 - change entrypoint to use `sleep infinity` to debug and not fail the container
 - use subPath as directory exist in container
 - remove ipsec mount
+- do not rely on pci override
+
+#### pktgen
+- what is /home/vcmts/Pktgen.lua and where it comes from?
+- fork `pktgen-host-config.sh` to add PCI PF/VF mapping
