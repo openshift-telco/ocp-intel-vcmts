@@ -5,6 +5,8 @@ NUMA node1 CPU(s):   32-63,96-127
 isolated: '4-31,36-63,68-95,100-127'
 reserved: '0-3,32-35,64-67,96-99'
 
+
+wget https://github.com/scylladb/dpdk/blob/master/tools/cpu_layout.py
 sh-4.4$ python3 cpu_layout.py 
 ============================================================
 Core and Socket Information (as reported by '/proc/cpuinfo')

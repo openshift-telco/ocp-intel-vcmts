@@ -182,6 +182,4 @@ declare -A pktgen_port_to_core_map=(
 ["54 ds"]="125"
 ["55 us"]="126"
 ["55 ds"]="127"
-
-# finish mapping
 )
