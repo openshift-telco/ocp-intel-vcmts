@@ -1,5 +1,7 @@
 # Charts
 
+` vcmts-pm config-service-groups` --> helm chart values.yaml file generation
+
 Labels are define as follow in repsective pod:
     vcmtspktgen=true
     vcmts=true
@@ -16,7 +18,8 @@ Labels are define as follow in repsective pod:
 - do not rely on pci override
 
 #### pktgen
-- what is /home/vcmts/Pktgen.lua and where it comes from?
+- Where /home/vcmts/Pktgen.lua comes from?
+    - https://raw.githubusercontent.com/pktgen/Pktgen-DPDK/pktgen-19.10.0/Pktgen.lua
 - fork `pktgen-host-config.sh` to add PCI PF/VF mapping
 -`run_pktgen.sh`
     - line 39 & 41: change intel.com to openshift.io
@@ -30,3 +33,27 @@ Labels are define as follow in repsective pod:
 - `vcmts-pm config-platform vcmtsd` | `vcmts-pm config-platform pktgen`
     - automatically generate pf to vf mapping?! 
         - *-host-config.sh 
+
+
+
+## TBD
+
+Do we need to run cable_pf_helper?
+
+vCMTS server
+  install_pcm_tool
+  install_power_mgmt_utilities
+  install_qat_drivers
+
+#### Remove mounts from host
+
+vcmtsd
+  /opt/power_mgmt
+  /var/run/collectd
+
+vcmts-power-mgr
+  /opt/power_mgmt
+
+
+## keep
+socat - TCP4:10.129.3.239:23000 < hello-world.lua
