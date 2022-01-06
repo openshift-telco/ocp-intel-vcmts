@@ -109,6 +109,9 @@ spec:
         - name: vcmtsd-configmap
           mountPath: /home/vcmts/vcmts-config/power_policy_destroy.cfg
           subPath: power_policy_destroy.cfg # use subPath as directory exist in container
+        - name: vcmtsd-configmap
+          mountPath: /home/vcmts/vcmts-config/vcmtsd-host-config.sh
+          subPath: vcmtsd-host-config.sh
         - name: hugepages
           mountPath: /hugepages
           readOnly: false

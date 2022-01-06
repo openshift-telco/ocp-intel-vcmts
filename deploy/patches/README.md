@@ -25,7 +25,10 @@ Labels are define as follow in repsective pod:
 - what is /home/vcmts/Pktgen.lua and where it comes from?
 - fork `pktgen-host-config.sh` to add PCI PF/VF mapping
 
+### vcmtsd
+- fork `vcmts-host-config.sh` to add PCI PF/VF mapping
+
 ### vcmts-pm
-- `vcmts-pm config-platform vcmtsd`
+- `vcmts-pm config-platform vcmtsd` | `vcmts-pm config-platform pktgen`
     - automatically generate pf to vf mapping?! 
         - *-host-config.sh 
