@@ -1,0 +1,12 @@
+topology:
+  us_sched_replicas: 1
+  us_sched_pods:
+  - config:
+    us_sched_id: 0
+    cpu_socket_id: 0
+    us_sched_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-us-sched:21.10.0
+    us_sched_port_id: 8300
+    hpg_sz: 1Gi
+    socket_mem: 512,0
+    socket_lim: 512,0
+    hpg_alloc_sz: 1024Mi

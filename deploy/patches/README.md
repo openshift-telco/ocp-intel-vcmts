@@ -14,13 +14,18 @@ Labels are define as follow in repsective pod:
 - remove hardcoded namespace
 
 #### `*-pod.yaml`
-- use respective us/ds sriov networks and define ip addr
+- use respective us/ds sriov networks
 - change intel.com to openshift.io
 - change entrypoint to use `sleep infinity` to debug and not fail the container
-- use subPath as directory exist in container
-- remove ipsec mount
+- use subPath for entrypoint script as directory exist in container
+- remove ipsec mount as provided directly in the container
 - do not rely on pci override
 
 #### pktgen
 - what is /home/vcmts/Pktgen.lua and where it comes from?
 - fork `pktgen-host-config.sh` to add PCI PF/VF mapping
+
+### vcmts-pm
+- `vcmts-pm config-platform vcmtsd`
+    - automatically generate pf to vf mapping?! 
+        - *-host-config.sh 
