@@ -4,12 +4,6 @@ Labels are define as follow in repsective pod:
     vcmtspktgen=true
     vcmts=true
 
-#### `run_vcmstd.sh`
-- line 116: `us_sched_ip_addr` do you need the IP address or DNS name is fine?
-
-#### `run_pktgen.sh`
-- line 39 & 41: change intel.com to openshift.io
-
 #### `*-configmap.yaml`
 - remove hardcoded namespace
 
@@ -24,9 +18,13 @@ Labels are define as follow in repsective pod:
 #### pktgen
 - what is /home/vcmts/Pktgen.lua and where it comes from?
 - fork `pktgen-host-config.sh` to add PCI PF/VF mapping
+-`run_pktgen.sh`
+    - line 39 & 41: change intel.com to openshift.io
 
 ### vcmtsd
 - fork `vcmts-host-config.sh` to add PCI PF/VF mapping
+- `run_vcmstd.sh`
+    - line 116: `us_sched_ip_addr` do you need the IP address or DNS name is fine?
 
 ### vcmts-pm
 - `vcmts-pm config-platform vcmtsd` | `vcmts-pm config-platform pktgen`
