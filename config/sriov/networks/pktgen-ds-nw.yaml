@@ -5,6 +5,6 @@ metadata:
   name: pktgen-ds
 spec:
   networkNamespace: vcmts-build
-  trust: 'off'
   resourceName: vcmts_nw_vf_socket_0_ds
-  spoofChk: 'on'
+  spoofChk: 'off'
+  trust: 'on'

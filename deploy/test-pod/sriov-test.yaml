@@ -17,7 +17,7 @@ spec:
     vcmts: "true"
   containers:
   - name: testpmd
-    image: registry.redhat.io/openshift4/dpdk-base-rhel8
+    image: docker.io/adetalhouet/dpdk-app-centos
     securityContext:
       runAsUser: 0
       capabilities:
@@ -30,14 +30,14 @@ spec:
         openshift.io/vcmts_nw_vf_socket_0_us: "1" 
         openshift.io/vcmts_nw_vf_socket_0_ds: "1" 
         memory: "1Gi"
-        cpu: "1" 
-        hugepages-1Gi: "2Gi" 
+        cpu: "4" 
+        hugepages-1Gi: "4Gi" 
       requests:
         openshift.io/vcmts_nw_vf_socket_0_us: "1" 
         openshift.io/vcmts_nw_vf_socket_0_ds: "1" 
         memory: "1Gi"
-        cpu: "1"
-        hugepages-1Gi: "2Gi"    
+        cpu: "4"
+        hugepages-1Gi: "4Gi"    
     command: ["sleep", "infinity"]
   volumes:
   - name: hugepage

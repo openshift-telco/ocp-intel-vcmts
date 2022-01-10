@@ -73,8 +73,11 @@ spec:
           subPath: run_pktgen.sh # use subPath as directory exist in container
         # - name: dpdk
         #   mountPath: /usr/local/lib/x86_64-linux-gnu
+      # securityContext:
+      #   privileged: true
       securityContext:
-        privileged: true
+        capabilities:
+          add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
     - name: sysfs
       hostPath:

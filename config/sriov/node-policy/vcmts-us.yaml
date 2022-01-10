@@ -10,10 +10,6 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens785f0#0-0'
-      - 'ens785f0#2-2'
-      - 'ens785f0#4-4'
-      - 'ens785f0#6-6'
       - 'ens785f1#0-0'
       - 'ens785f1#2-2'
       - 'ens785f1#4-4'

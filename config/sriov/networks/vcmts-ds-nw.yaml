@@ -5,7 +5,6 @@ metadata:
   name: vcmts-ds
 spec:
   networkNamespace: vcmts-build
-  ipam: {}
-  trust: 'off'
   resourceName: vcmts_nw_vf_socket_0_ds
-  spoofChk: 'on'
+  spoofChk: 'off'
+  trust: 'on'
