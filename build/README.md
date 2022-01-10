@@ -59,7 +59,7 @@ $ oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
 
 The pipeline is comprised of 4 tasks, as follow:
 
-![Architecture](../docs/pipeline-overview.png)
+![Architecture](../assets/pipeline-overview.png)
 
 The details for the `get-vcmts-archive` and `build-*` tasks are in `pipeline/tasks` folder
 
@@ -113,9 +113,11 @@ After +/- 15mn, when the build is done, you should see this:
 
 ~~~
 $ oc get imagestream -n vcmts-build
-NAME           IMAGE REPOSITORY                                                                          TAGS      UPDATED
-vcmts          default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts          21.10.0   2 minutes ago
-vcmts-pktgen   default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-pktgen   21.10.0   7 minutes ago
+NAME                             IMAGE REPOSITORY                                                                                            TAGS      UPDATED
+vcmts-d                          default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-d                          21.10.0   4 days ago
+vcmts-pktgen                     default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-pktgen                     21.10.0   4 days ago
+vcmts-platform-management-tool   default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-platform-management-tool   21.10.0   4 days ago
+vcmts-us-sched                   default-route-openshift-image-registry.apps.npgcable.intel.com/vcmts-build/vcmts-us-sched                   21.10.0   4 days ago
 ~~~
 
 ### Local Build
