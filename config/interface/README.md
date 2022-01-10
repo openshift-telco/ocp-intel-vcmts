@@ -1,1 +1,0 @@
-Doesn't work yet - should be used to configured host interface to enable traffic between vcmts and pktgen server
