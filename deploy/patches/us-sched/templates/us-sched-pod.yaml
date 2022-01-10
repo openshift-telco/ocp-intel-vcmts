@@ -1,0 +1,91 @@
+{{- $root := . -}}
+{{- range $i,$v := until (int .Values.topology.us_sched_replicas) -}}
+{{- $pods := $root.Values.topology.us_sched_pods -}}
+{{- $pod := (index $pods $i) -}}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: us-sched-{{- $pod.us_sched_id }}
+spec:
+  selector:
+    name: us-sched-{{- $pod.us_sched_id }}
+  ports:
+    - name: us-sched-iface
+      port: {{ $pod.us_sched_port_id }}
+      targetPort: {{ $pod.us_sched_port_id }}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: us-sched-{{- $pod.us_sched_id }}
+  labels:
+    name: us-sched-{{- $pod.us_sched_id }}
+  annotations:
+    # use sriov network
+     k8s.v1.cni.cncf.io/networks: '[
+        {"name": "vcmts-us"}
+    ]'
+spec:
+  nodeSelector:
+    vcmts: "true"
+  securityContext:
+    fsGroup: 1999
+  containers:
+    - name: us-sched-{{- $pod.us_sched_id }}
+      image: {{$pod.us_sched_image}}
+      env:
+      - name: US_SCHED_ID
+        value: "{{ $pod.us_sched_id }}"
+      - name: US_SCHED_PORT_ID
+        value: "{{ $pod.us_sched_port_id }}"
+      - name: CPU_SOCKET_ID
+        value: "{{ $pod.cpu_socket_id }}"
+      - name: SOCKET_MEM
+        value: "{{ $pod.socket_mem }}"
+      - name: SOCKET_LIM
+        value: "{{ $pod.socket_lim }}"
+      command:
+      - "/bin/bash"
+      - "-c"
+      args: [ "sleep infinity" ] # [ "/home/vcmts/us-sched-config/run_us_sched.sh" ]
+      resources:
+        requests:
+          memory: 400Mi
+          cpu: 1
+          hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
+        limits:
+          memory: 400Mi
+          cpu: 1
+          hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
+          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
+      volumeMounts:
+        - name: us-sched-configmap
+          mountPath: /home/vcmts/us-sched-config/run_us_sched.sh
+          subPath: run_us_sched.sh # use subPath as directory exist in container
+        - name: hugepages
+          mountPath: /hugepages
+          readOnly: false
+        - name: sysfs
+          mountPath: /sys
+          readOnly: false
+        # - name: ipsec
+        #   mountPath: /usr/lib/libIPSec_MB.so.1
+  volumes:
+    - name: us-sched-configmap
+      configMap:
+        name: us-sched-configmap
+        defaultMode: 0777
+    - name: hugepages
+      emptyDir:
+        medium: HugePages
+    - name: sysfs
+      hostPath:
+        path: /sys
+    # - name: ipsec
+    #   hostPath:
+    #     path: /usr/lib/libIPSec_MB.so.1
+  restartPolicy: Never
+---
+{{- end -}}

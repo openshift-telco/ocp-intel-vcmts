@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vcmts-platform-management-tool
+  labels:
+    app: vcmts-platform-management-tool
+  namespace: vcmts-build
+spec:
+  containers:
+    - name: vcmts-platform-management-tool
+      image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-platform-management-tool:21.10.0
+      command: ["/bin/sh"]
+      args: ["-c", "sleep infinity"]
+      imagePullPolicy: Always
+  serviceAccount: pipeline

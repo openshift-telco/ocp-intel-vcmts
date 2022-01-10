@@ -1,7 +1,7 @@
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  name: vcmts-nw-vf-socket-0-ds
+  name: pktgen-us
   namespace: openshift-sriov-network-operator
 spec:
   deviceType: vfio-pci
@@ -10,17 +10,13 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens785f0#1-1'
-      - 'ens785f0#3-3'
-      - 'ens785f0#5-5'
-      - 'ens785f0#7-7'
-      - 'ens785f1#1-1'
-      - 'ens785f1#3-3'
-      - 'ens785f1#5-5'
-      - 'ens785f1#7-7'
+      - 'ens785f1#0-0'
+      - 'ens785f1#2-2'
+      - 'ens785f1#4-4'
+      - 'ens785f1#6-6'
     vendor: '8086'
   nodeSelector:
-    node-role.kubernetes.io/vcmts: ''
+    node-role.kubernetes.io/pktgen: ''
   numVfs: 8
   priority: 99
-  resourceName: vcmts_nw_vf_socket_0_ds
+  resourceName: vcmts_nw_vf_socket_0_us

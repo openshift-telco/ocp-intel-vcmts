@@ -17,8 +17,8 @@ topology:
     us_sched_enabled: false
     us_sched_id: 0
     sg_id: 0
-    net_us: 18:02.0
-    net_ds: 18:02.1
+    # net_us: 18:02.0
+    # net_ds: 18:02.1
     num_ofdm: 6
     num_subs: 300
     cm_crypto: aes

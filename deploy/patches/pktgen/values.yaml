@@ -1,0 +1,20 @@
+images:
+  vcmts_pktgen: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-pktgen:21.10.0
+topology:
+  pktgen_replicas: 1
+  pktgen_pods:
+  - pktgen_id: 0
+    num_sockets: 2
+    cpu_socket_id: 0
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+      # net_pktgen: 05:02.0
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+      # net_pktgen: 05:02.1

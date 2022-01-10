@@ -7,9 +7,10 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: vcmtsd-{{- $pod.sg_id }}
-  annotations:
-    networks: '[
-        { "name": "flannel" }
+  annotations: # use sriov networks
+     k8s.v1.cni.cncf.io/networks: '[
+        { "name": "vcmts-ds"},
+        {"name": "vcmts-us"}
     ]'
 spec:
   nodeSelector:
@@ -108,6 +109,9 @@ spec:
         - name: vcmtsd-configmap
           mountPath: /home/vcmts/vcmts-config/power_policy_destroy.cfg
           subPath: power_policy_destroy.cfg # use subPath as directory exist in container
+        - name: vcmtsd-configmap
+          mountPath: /home/vcmts/vcmts-config/vcmtsd-host-config.sh
+          subPath: vcmtsd-host-config.sh
         - name: hugepages
           mountPath: /hugepages
           readOnly: false
@@ -124,8 +128,11 @@ spec:
           mountPath: /opt/power_mgmt
         # - name: ipsec
         #   mountPath: /usr/lib/libIPSec_MB.so.1
+      # securityContext:
+      #   privileged: true
       securityContext:
-        privileged: true
+        capabilities:
+          add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
     - name: vcmtsd-configmap
       configMap:

@@ -1,0 +1,10 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: pktgen-us
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_socket_0_us
+  spoofChk: 'off'
+  trust: 'on'

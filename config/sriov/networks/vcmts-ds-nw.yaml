@@ -1,0 +1,10 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: vcmts-ds
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_socket_0_ds
+  spoofChk: 'off'
+  trust: 'on'
