@@ -1,0 +1,11 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: vcmts
+  name: downstream-processing-per-sg
+  namespace: vcmts-build
+spec:
+  configMapRef:
+    key: DownstreamProcessingPerSG.json
+    name: vcmts-grafana-downstream-processing-per-sg

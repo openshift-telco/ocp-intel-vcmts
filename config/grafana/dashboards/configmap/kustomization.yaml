@@ -1,0 +1,21 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: vcmts-build
+
+configMapGenerator:
+- name: vcmts-grafana-downstream-processing-per-sg
+  options:
+    disableNameSuffixHash: true
+  files:
+    - DownstreamProcessingPerSG.json
+- name: vcmts-grafana-system-summary
+  options:
+    disableNameSuffixHash: true
+  files:
+    - SystemSummary.json
+- name: vcmts-grafana-upstream-processing-per-dg
+  options:
+    disableNameSuffixHash: true
+  files:
+    - UpstreamProcessingPerSG.json

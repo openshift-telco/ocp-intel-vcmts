@@ -1,0 +1,11 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: vcmts
+  name: system-summary
+  namespace: vcmts-build
+spec:
+  configMapRef:
+    key: SystemSummary.json
+    name: vcmts-grafana-system-summary
