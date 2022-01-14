@@ -1,0 +1,36 @@
+FROM registry.access.redhat.com/ubi8/ubi
+
+LABEL maintainer="Intel Corporation"
+
+LABEL com.redhat.component="ubi8-container" \
+      name="vcmts-collectd" \
+      version="${VCMTS_VERSION}"
+LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS collectd."
+LABEL io.k8s.display-name="Intel vCMTS ${VCMTS_VERSION} collectd"
+LABEL io.openshift.tags="vcmts collectd"
+
+RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager python2 python2-devel \
+http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/OpenIPMI-libs-2.0.31-3.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/libmicrohttpd-0.9.59-2.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-5.11.0-2.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-ipmi-5.11.0-2.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-pmu-5.11.0-2.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-python-5.11.0-2.el8.x86_64.rpm \
+http://mirror.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-write_prometheus-5.11.0-2.el8.x86_64.rpm
+RUN dnf clean all && rm -fr /var/cache/dnf
+
+RUN pip2 install python-config
+RUN ln /usr/bin/python2 /usr/bin/python
+
+RUN useradd -s /bin/bash -d /home/vcmts/ -m -u 1999 vcmts
+WORKDIR /home/vcmts
+USER root
+
+# Config
+RUN mkdir /usr/share/collectd/python/
+
+COPY utils.py /usr/share/collectd/python/
+COPY vcmts.types.db /usr/share/collectd/vcmts.types.db
+COPY collectd.conf /etc/collectd.d/collectd.conf
+
+ENTRYPOINT ["/usr/sbin/collectd -C /etc/collectd.d/collectd.conf"]
