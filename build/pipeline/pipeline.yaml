@@ -29,7 +29,7 @@ spec:
         - name: url
           value: 'git@github.com:openshift-telco/ocp-intel-vcmts.git'
         - name: revision
-          value: pipeline
+          value: main
         - name: submodules
           value: 'true'
         - name: depth
@@ -105,6 +105,54 @@ spec:
           value: build_platform_management_tool.sh
         - name: REGISTRY_URL
           value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+    - name: build-us-sched
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_us_sched.sh
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+    - name: build-power-mgr
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_power_mgr.sh
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
+    - name: build-collectd
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_collectd.sh
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
       runAfter:
