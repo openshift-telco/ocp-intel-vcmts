@@ -152,7 +152,7 @@ spec:
         - name: SCRIPT_TO_EXECUTE
           value: build_collectd.sh
         - name: REGISTRY_URL
-          value: $(params.REGISTRY_URL)
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
         - name: VCMTS_VERSION
           value: $(params.VCMTS_VERSION)
       runAfter:
