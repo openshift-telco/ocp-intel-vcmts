@@ -116,7 +116,8 @@ spec:
           mountPath: /hugepages
           readOnly: false
         - name: collectd
-          mountPath: /opt/collectd/var/run
+          mountPath: /opt/collectd/var/run/collectd.sock
+          subPath: collectd.sock
           readOnly: false
         - name: sysfs
           mountPath: /sys
@@ -142,8 +143,8 @@ spec:
       emptyDir:
         medium: HugePages
     - name: collectd
-      hostPath:
-        path: /var/run/collectd
+      persistentVolumeClaim:
+        claimName: collectd-pvc
     - name: sysfs
       hostPath:
         path: /sys

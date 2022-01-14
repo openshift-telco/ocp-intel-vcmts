@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: collectd-pvc
+  namespace: vcmts-build
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: "ocs-storagecluster-cephfs"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: collectd-exporter
+  namespace: vcmts-build
+spec:
+  ports:
+    - name: collectd-exporter
+      protocol: TCP
+      port: 9103
+    - name: collectd-exporter-prom
+      protocol: UDP
+      port: 25826
+  selector:
+    app: collectd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: collectd
+  labels:
+    app: collectd
+  namespace: vcmts-build
+spec:
+  containers:
+    - name: collectd
+      image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-collectd:21.10.0
+      command: ["/bin/sh"]
+      args: ["-c", "sleep infinity"]
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: collectd
+          mountPath: /var/run/
+          readOnly: false
+    - name: collectd-exporter
+      imagePullPolicy: Always
+      image: prom/collectd-exporter
+      args:
+      - --web.listen-address=0.0.0.0:9103
+      - --collectd.listen-address=0.0.0.0:25826
+      ports:
+        - containerPort: 25826
+          protocol: UDP
+        - containerPort: 9103
+  serviceAccount: pipeline
+  volumes:
+    - name: collectd
+      persistentVolumeClaim:
+        claimName: collectd-pvc
