@@ -7,7 +7,7 @@
 set -o errexit
 
 # only for local build
-source build_config
+# source build_config
 
 # Set envs
 # IS_RHEL_BUILD=y
