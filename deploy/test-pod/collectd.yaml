@@ -1,32 +1,35 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: collectd-pvc
-  namespace: vcmts-build
-spec:
-  accessModes:
-    - ReadWriteMany
-  volumeMode: Filesystem
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: "ocs-storagecluster-cephfs"
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: collectd-exporter
   namespace: vcmts-build
+  labels:
+    app: collectd
 spec:
   ports:
-    - name: collectd-exporter
+    - name: web
       protocol: TCP
       port: 9103
-    - name: collectd-exporter-prom
-      protocol: UDP
-      port: 25826
+      targetPort: 9103
   selector:
     app: collectd
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: collectd
+  name: prometheus-vcmts-monitor
+  namespace: vcmts-build
+spec:
+  endpoints:
+  - interval: 5s
+    port: web
+    scheme: http
+  selector:
+    matchLabels:
+      app: collectd
 ---
 apiVersion: v1
 kind: Pod
@@ -36,28 +39,31 @@ metadata:
     app: collectd
   namespace: vcmts-build
 spec:
+  nodeSelector:
+    vcmts: "true"
+  securityContext:
+    fsGroup: 1999
   containers:
     - name: collectd
+      securityContext:
+        privileged: true
       image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-collectd:21.10.0
       command: ["/bin/sh"]
-      args: ["-c", "sleep infinity"]
+      args: ["-c", "/usr/sbin/collectd -C /etc/collectd.d/collectd.conf"]
       imagePullPolicy: Always
       volumeMounts:
         - name: collectd
-          mountPath: /var/run/
+          mountPath: /var/run/socket
           readOnly: false
     - name: collectd-exporter
       imagePullPolicy: Always
       image: prom/collectd-exporter
       args:
       - --web.listen-address=0.0.0.0:9103
-      - --collectd.listen-address=0.0.0.0:25826
       ports:
-        - containerPort: 25826
-          protocol: UDP
         - containerPort: 9103
-  serviceAccount: pipeline
   volumes:
     - name: collectd
-      persistentVolumeClaim:
-        claimName: collectd-pvc
+      hostPath:
+        path: /var/run/collectd
+        type: DirectoryOrCreate

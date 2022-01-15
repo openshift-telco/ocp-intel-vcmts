@@ -117,7 +117,6 @@ spec:
           readOnly: false
         - name: collectd
           mountPath: /opt/collectd/var/run/collectd.sock
-          subPath: collectd.sock
           readOnly: false
         - name: sysfs
           mountPath: /sys
@@ -129,11 +128,11 @@ spec:
           mountPath: /opt/power_mgmt
         # - name: ipsec
         #   mountPath: /usr/lib/libIPSec_MB.so.1
-      # securityContext:
-      #   privileged: true
       securityContext:
-        capabilities:
-          add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
+        privileged: true
+      # securityContext:
+        # capabilities:
+          # add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
     - name: vcmtsd-configmap
       configMap:
@@ -143,8 +142,9 @@ spec:
       emptyDir:
         medium: HugePages
     - name: collectd
-      persistentVolumeClaim:
-        claimName: collectd-pvc
+      hostPath:
+        path: /var/run/collectd/collectd.sock
+        type: Socket
     - name: sysfs
       hostPath:
         path: /sys
