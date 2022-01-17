@@ -6,6 +6,9 @@ metadata:
   name: system-summary
   namespace: vcmts-build
 spec:
+  plugins:
+    - name: "pierosavi-imageit-panel"
+      version: "1.0.6"
   configMapRef:
     key: SystemSummary.json
     name: vcmts-grafana-system-summary

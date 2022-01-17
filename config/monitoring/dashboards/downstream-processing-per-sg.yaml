@@ -6,6 +6,9 @@ metadata:
   name: downstream-processing-per-sg
   namespace: vcmts-build
 spec:
+  plugins:
+    - name: "grafana-piechart-panel"
+      version: "1.3.8"
   configMapRef:
     key: DownstreamProcessingPerSG.json
     name: vcmts-grafana-downstream-processing-per-sg
