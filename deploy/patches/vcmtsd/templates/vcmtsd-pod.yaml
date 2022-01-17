@@ -130,7 +130,6 @@ spec:
         #   mountPath: /usr/lib/libIPSec_MB.so.1
       securityContext:
         privileged: true
-      # securityContext:
         # capabilities:
           # add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
