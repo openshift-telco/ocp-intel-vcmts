@@ -1,0 +1,23 @@
+apiVersion: performance.openshift.io/v2
+kind: PerformanceProfile
+metadata:
+  name: vcmts-profile0
+spec:
+  cpu:
+    isolated: 4-31,36-63,68-95,100-127
+    reserved: 0-3,32-35,64-67,96-99
+  hugepages:
+    defaultHugepagesSize: 1G
+    pages:
+    - count: 102
+      node: 0
+      size: 1G
+    - count: 102
+      node: 1
+      size: 1G
+  nodeSelector:
+    node-role.kubernetes.io/vcmts: ""
+  numa:
+    topologyPolicy: single-numa-node
+  realTimeKernel:
+    enabled: false
