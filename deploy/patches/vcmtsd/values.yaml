@@ -11,9 +11,9 @@ topology:
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
-    latency: no
-    cycles: no
-    app_stats: no
+    latency: yes
+    cycles: yes
+    app_stats: yes
     us_sched_enabled: false
     us_sched_id: 0
     sg_id: 0

@@ -1,7 +1,4 @@
 # Charts
-
-` vcmts-pm config-service-groups` --> helm chart values.yaml file generation
-
 Labels are define as follow in repsective pod:
     vcmtspktgen=true
     vcmts=true
@@ -28,30 +25,3 @@ Labels are define as follow in repsective pod:
 - fork `vcmts-host-config.sh` to add PCI PF/VF mapping
 - `run_vcmstd.sh`
     - line 116: `us_sched_ip_addr` do you need the IP address or DNS name is fine?
-
-#### vcmts-pm
-- `vcmts-pm config-platform vcmtsd` | `vcmts-pm config-platform pktgen`
-    - automatically generate pf to vf mapping?! 
-        - *-host-config.sh 
-
-
-
-#### TBD
-Do we need to run cable_pf_helper?
-
-#### tools that aren't installed
-vCMTS server
-  install_pcm_tool
-  install_power_mgmt_utilities
-  install_qat_drivers
-
-#### Remove mounts from host
-vcmtsd
-  /opt/power_mgmt
-  /var/run/collectd
-
-vcmts-power-mgr
-  /opt/power_mgmt
-
-##### Test pktgen Lua socket from host
-socat - TCP4:10.129.3.239:23000 < hello-world.lua

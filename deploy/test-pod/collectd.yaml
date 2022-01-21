@@ -1,0 +1,69 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: collectd-exporter
+  namespace: vcmts-build
+  labels:
+    app: collectd
+spec:
+  ports:
+    - name: web
+      protocol: TCP
+      port: 9103
+      targetPort: 9103
+  selector:
+    app: collectd
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: collectd
+  name: prometheus-vcmts-monitor
+  namespace: vcmts-build
+spec:
+  endpoints:
+  - interval: 5s
+    port: web
+    scheme: http
+  selector:
+    matchLabels:
+      app: collectd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: collectd
+  labels:
+    app: collectd
+  namespace: vcmts-build
+spec:
+  nodeSelector:
+    vcmts: "true"
+  securityContext:
+    fsGroup: 1999
+  containers:
+    - name: collectd
+      securityContext:
+        privileged: true
+      image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-collectd:21.10.0
+      command: ["/bin/sh"]
+      args: ["-c", "sleep infinity"] # /usr/sbin/collectd -C /etc/collectd.d/collectd.conf
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: collectd
+          mountPath: /var/run/socket
+          readOnly: false
+    - name: collectd-exporter
+      imagePullPolicy: Always
+      image: prom/collectd-exporter
+      args:
+      - --web.listen-address=0.0.0.0:9103
+      ports:
+        - containerPort: 9103
+  volumes:
+    - name: collectd
+      hostPath:
+        path: /var/run/collectd
+        type: DirectoryOrCreate

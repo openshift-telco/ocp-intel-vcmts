@@ -1,0 +1,14 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: vcmts
+  name: vcmts-grafana-upstream-processing-per-dg
+  namespace: vcmts-build
+spec:
+  plugins:
+    - name: "grafana-piechart-panel"
+      version: "1.3.8"        
+  configMapRef:
+    key: UpstreamProcessingPerSG.json
+    name: vcmts-grafana-upstream-processing-per-dg

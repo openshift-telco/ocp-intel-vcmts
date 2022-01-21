@@ -116,7 +116,7 @@ spec:
           mountPath: /hugepages
           readOnly: false
         - name: collectd
-          mountPath: /opt/collectd/var/run
+          mountPath: /opt/collectd/var/run/collectd.sock
           readOnly: false
         - name: sysfs
           mountPath: /sys
@@ -128,11 +128,10 @@ spec:
           mountPath: /opt/power_mgmt
         # - name: ipsec
         #   mountPath: /usr/lib/libIPSec_MB.so.1
-      # securityContext:
-      #   privileged: true
       securityContext:
-        capabilities:
-          add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
+        privileged: true
+        # capabilities:
+          # add: ["IPC_LOCK","SYS_RESOURCE","NET_RAW"]
   volumes:
     - name: vcmtsd-configmap
       configMap:
@@ -143,7 +142,8 @@ spec:
         medium: HugePages
     - name: collectd
       hostPath:
-        path: /var/run/collectd
+        path: /var/run/collectd/collectd.sock
+        type: Socket
     - name: sysfs
       hostPath:
         path: /sys
