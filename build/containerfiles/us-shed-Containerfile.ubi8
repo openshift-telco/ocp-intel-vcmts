@@ -9,7 +9,7 @@ LABEL io.k8s.display-name="Intel vCMTS us-shed ${VCMTS_VERSION}"
 LABEL io.openshift.tags="vcmts-us-shed"
 
 # Install jansson and libcollectdclient required by vcmts-d binary
-RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager openssl \
+RUN dnf install -y --setopt=tsflags=nodocs --nogpgcheck --disableplugin=subscription-manager openssl \
     http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm \
     https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/34/Everything/x86_64/os/Packages/l/libcollectdclient-5.12.0-2.fc34.x86_64.rpm
 

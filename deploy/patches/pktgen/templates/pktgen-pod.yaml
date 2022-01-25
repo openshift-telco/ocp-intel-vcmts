@@ -13,12 +13,16 @@ metadata:
   name: vcmts-pktgen-pod-{{- $pod.pktgen_id }}
   labels:
     name: pktgen
-  annotations: # use sriov networks
+  annotations: 
+     irq-load-balancing.crio.io: "disable"
+     cpu-load-balancing.crio.io: "disable"
+     # use sriov networks
      k8s.v1.cni.cncf.io/networks: '[
         { "name": "pktgen-ds" },
         {"name": "pktgen-us"}
     ]'
 spec:
+  runtimeClassName: performance-pktgen-profile0
   nodeSelector:
     vcmtspktgen: "true"
   containers:

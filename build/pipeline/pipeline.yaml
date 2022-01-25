@@ -163,5 +163,21 @@ spec:
       workspaces:
         - name: input
           workspace: shared-workspace
+    - name: build-pcm
+      params:
+        - name: SCRIPT_TO_EXECUTE
+          value: build_pcm.sh
+        - name: REGISTRY_URL
+          value: $(params.REGISTRY_URL)/$(context.pipelineRun.namespace)
+        - name: VCMTS_VERSION
+          value: $(params.VCMTS_VERSION)
+      runAfter:
+        - get-vcmts-archive
+      taskRef:
+        kind: Task
+        name: build-container
+      workspaces:
+        - name: input
+          workspace: shared-workspace
   workspaces:
     - name: shared-workspace

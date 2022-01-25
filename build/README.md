@@ -57,7 +57,7 @@ $ oc apply -f pipeline/vcmts-build-workspace-pvc.yaml
 
 ##### Pipeline tasks
 
-The pipeline is comprised of 4 tasks, as follow:
+The pipeline is comprised of 8 tasks, as follow:
 
 ![Architecture](../assets/pipeline-overview.png)
 

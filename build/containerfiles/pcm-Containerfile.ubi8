@@ -1,0 +1,19 @@
+FROM registry.access.redhat.com/ubi8/ubi as builder
+
+RUN dnf -y install gcc-c++ git findutils make cmake
+RUN git clone http://github.com/opcm/pcm.git /tmp/pcm
+RUN cd /tmp/pcm && mkdir build && cd build && cmake .. && make
+
+FROM registry.access.redhat.com/ubi8/ubi
+RUN dnf install -y --setopt=tsflags=nodocs socat hostname
+COPY --from=builder /tmp/pcm/build/bin/* /usr/local/bin/
+ENV PCM_NO_PERF=1
+ENV VCMTS_ENVIRONMENT="openshift"
+
+RUN useradd -s /bin/bash -d /home/vcmts/ -m -u 1999 vcmts
+WORKDIR /home/vcmts
+USER root
+RUN mkdir /home/vcmts/pcm
+COPY get_bandwidth_pcm.sh /home/vcmts/get_bandwidth_pcm.sh
+RUN ln -s /usr/local/bin/pcm-memory /home/vcmts/pcm/pcm-memory.x
+RUN chmod +x /home/vcmts/pcm/pcm-memory.x

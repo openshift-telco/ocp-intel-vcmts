@@ -9,7 +9,7 @@ LABEL summary="Provides the ${VCMTS_VERSION} release of Intel vCMTS Packet Gener
 LABEL io.k8s.display-name="Intel vCMTS Packet Generator ${VCMTS_VERSION}"
 LABEL io.openshift.tags="vcmts pktgen"
 
-RUN dnf install -y --nogpgcheck --disableplugin=subscription-manager \ 
+RUN dnf install -y --setopt=tsflags=nodocs --nogpgcheck --disableplugin=subscription-manager \ 
   git gcc-c++ gcc cmake make automake autoconf libtool \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/libpcap-devel-1.9.1-5.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/lua-devel-5.3.4-12.el8.x86_64.rpm \
