@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/ubi as builder
 
 RUN dnf -y install gcc-c++ git findutils make cmake
-COPY . /tmp/pcm
+RUN git clone http://github.com/opcm/pcm.git /tmp/pcm
 RUN cd /tmp/pcm && mkdir build && cd build && cmake .. && make
 
 FROM registry.access.redhat.com/ubi8/ubi
