@@ -14,7 +14,7 @@ spec:
         privileged: true
       image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-pcm:21.10.0
       command: ["/bin/sh"]
-      args: ["-c", "sleep infinity"]
+      args: ["-c", "./get_bandwidth_pcm.sh /home/vcmts"]
       imagePullPolicy: Always
       volumeMounts:
         - name: pcm-monitoring
