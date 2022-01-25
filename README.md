@@ -146,6 +146,55 @@ Deploy PCM after collectd has been deployed, given it rely on the collectd socke
 oc create -f deploy/test-pod/pcm.yaml
 ~~~
 
+## Monitoring
+
+Setup OpenShift Prometheus to scrape user projects metrics
+```
+oc apply -f config/monitoring/prometheus-enable-user-workload.yaml
+```
+
+Load vCMTS Grafana Dashboard
+```
+oc kustomize config/monitoring/dashboards | oc apply -f -
+```
+
+Create Grafana Instance
+```
+oc create -f config/monitoring/grafana.yaml
+```
+
+Configure Grafna to use OpenShift thanos as proxy data source to retrieve prometheus data.
+```
+oc adm policy add-cluster-role-to-user cluster-monitoring-view -z grafana-serviceaccount -n vcmts-build
+BEARER_TOKEN=$(oc serviceaccounts get-token grafana-serviceaccount -n vcmts-build)
+
+echo "apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: prometheus-grafanadatasource
+  namespace: vcmts-build
+spec:
+  datasources:
+    - access: proxy
+      editable: true
+      isDefault: true
+      jsonData:
+        httpHeaderName1: 'Authorization'
+        timeInterval: 5s
+        tlsSkipVerify: true
+      name: prometheus
+      secureJsonData:
+        httpHeaderValue1: 'Bearer ${BEARER_TOKEN}'
+      type: prometheus
+      url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
+  name: prometheus-grafanadatasource.yaml" | oc apply -f -
+```
+
+Deploy collectd and collectd-exporter, along with OpenShift Prometheus metrics scrapper `ServiceMonitor`
+```
+oc create -f deploy/test-pod/collectd.yaml
+```
+
 ## Deploy the application
 
 Now that the monitoring stack is up and running, you can deploy the applications.
