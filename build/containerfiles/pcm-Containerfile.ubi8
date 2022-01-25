@@ -16,4 +16,4 @@ USER root
 RUN mkdir /home/vcmts/pcm
 COPY get_bandwidth_pcm.sh /home/vcmts/get_bandwidth_pcm.sh
 RUN ln -s /usr/local/bin/pcm-memory /home/vcmts/pcm/pcm-memory.x
-RUN chmod +x pcm-memory.x
+RUN chmod +x /home/vcmts/pcm/pcm-memory.x
