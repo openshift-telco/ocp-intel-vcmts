@@ -6,7 +6,7 @@ topology:
   - pktgen_id: 0
     pf_index: 0
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -20,7 +20,7 @@ topology:
   - pktgen_id: 1
     pf_index: 0
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -34,7 +34,7 @@ topology:
   - pktgen_id: 2
     pf_index: 0
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -48,7 +48,7 @@ topology:
   - pktgen_id: 3
     pf_index: 0
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -62,7 +62,7 @@ topology:
   - pktgen_id: 4
     pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -76,7 +76,7 @@ topology:
   - pktgen_id: 5
     pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -90,7 +90,7 @@ topology:
   - pktgen_id: 6
     pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -104,7 +104,7 @@ topology:
   - pktgen_id: 7
     pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
