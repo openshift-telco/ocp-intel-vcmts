@@ -46,7 +46,6 @@ oc apply -f config/pao/pktgen-profile.yaml
 ~~~
 
 ## SRIOV Configuration
-
 Both servers are connected back-to-back through E810 network interface, that each of two ports.
 
 Virtual functions (VFs) from the same physical function (PF) are split into two resource pools in order to segragate and dedicate  Upstream and Downstream traffic.
