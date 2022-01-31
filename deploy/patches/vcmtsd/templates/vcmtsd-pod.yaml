@@ -23,6 +23,7 @@ spec:
   containers:
     - name: vcmtsd-{{- $pod.sg_id }}
       image: {{$pod.vcmtsd_image}}
+      imagePullPolicy: Always
       ports:
       - containerPort: {{ $pod.tls_port }}
         hostPort: {{ $pod.tls_port }}
@@ -82,7 +83,7 @@ spec:
       command:
       - "/bin/bash"
       - "-c"
-      args: [ "sleep infinity" ] #[ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ]
+      args: [ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ] #[ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ]
       resources:
         requests:
           memory: 200Mi
