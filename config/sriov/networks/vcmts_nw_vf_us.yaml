@@ -1,0 +1,43 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: vcmts-us-0
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_us_0
+  spoofChk: 'off'
+  trust: 'on'
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: vcmts-us-1
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_us-1
+  spoofChk: 'off'
+  trust: 'on'
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: vcmts-us-2
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_us-2
+  spoofChk: 'off'
+  trust: 'on'
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  namespace: openshift-sriov-network-operator
+  name: vcmts-us-3
+spec:
+  networkNamespace: vcmts-build
+  resourceName: vcmts_nw_vf_us-3
+  spoofChk: 'off'
+  trust: 'on'

@@ -1,7 +1,7 @@
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  name: vcmts-ds
+  name: vcmts-ds-0
   namespace: openshift-sriov-network-operator
 spec:
   deviceType: vfio-pci
@@ -19,4 +19,74 @@ spec:
     node-role.kubernetes.io/vcmts: ''
   numVfs: 8
   priority: 99
-  resourceName: vcmts_nw_vf_socket_0_ds
+  resourceName: vcmts_nw_vf_ds_0
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: vcmts-ds-1
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: vfio-pci
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    deviceID: '1592'
+    pfNames:
+      - 'ens786f1#1-1'
+      - 'ens786f1#3-3'
+      - 'ens786f1#5-5'
+      - 'ens786f1#7-7'
+    vendor: '8086'
+  nodeSelector:
+    node-role.kubernetes.io/vcmts: ''
+  numVfs: 8
+  priority: 99
+  resourceName: vcmts_nw_vf_ds_1
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: vcmts-ds-2
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: vfio-pci
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    deviceID: '1592'
+    pfNames:
+      - 'ens801f1#1-1'
+      - 'ens801f1#3-3'
+      - 'ens801f1#5-5'
+      - 'ens801f1#7-7'
+    vendor: '8086'
+  nodeSelector:
+    node-role.kubernetes.io/vcmts: ''
+  numVfs: 8
+  priority: 99
+  resourceName: vcmts_nw_vf_ds_2
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: vcmts-ds-3
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: vfio-pci
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    deviceID: '1592'
+    pfNames:
+      - 'ens802f1#1-1'
+      - 'ens802f1#3-3'
+      - 'ens802f1#5-5'
+      - 'ens802f1#7-7'
+    vendor: '8086'
+  nodeSelector:
+    node-role.kubernetes.io/vcmts: ''
+  numVfs: 8
+  priority: 99
+  resourceName: vcmts_nw_vf_ds_3
+---
