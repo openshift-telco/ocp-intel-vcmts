@@ -11,8 +11,8 @@ metadata:
      irq-load-balancing.crio.io: "disable"
      cpu-load-balancing.crio.io: "disable"
      k8s.v1.cni.cncf.io/networks: '[
-        { "name": "vcmts-ds"},
-        {"name": "vcmts-us"}
+        { "name": "vcmts-ds-{{ $pod.pf_index}}"},
+        {"name": "vcmts-us-{{ $pod.pf_index}}"}
     ]'
 spec:
   runtimeClassName: performance-vcmts-profile0
@@ -23,6 +23,7 @@ spec:
   containers:
     - name: vcmtsd-{{- $pod.sg_id }}
       image: {{$pod.vcmtsd_image}}
+      imagePullPolicy: Always
       ports:
       - containerPort: {{ $pod.tls_port }}
         hostPort: {{ $pod.tls_port }}
@@ -62,11 +63,17 @@ spec:
       - name: CORE_CONFIG
         value: "{{ $pod.core_config }}"
       - name: NIC_PCIADDR_RPHY # change intel.com to openshift.io
-        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_{{ $pod.cpu_socket_id }}_US"
+        # Remove cpu_socket_id reference
+        # Add pf_index reference
+        # Add pf_index field to vcmtsd values.yaml for the helm chart
+        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_US_{{ $pod.pf_index }}"
       - name: NIC_OVERRIDE_RPHY
         value: "{{ $pod.net_us }}"
       - name: NIC_PCIADDR_NET # change intel.com to openshift.io
-        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_{{ $pod.cpu_socket_id }}_DS"
+        # Remove cpu_socket_id reference
+        # Add pf_index reference
+        # Add pf_index field to vcmtsd values.yaml for the helm chart
+        value: "PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_DS_{{ $pod.pf_index }}"
       - name: NIC_OVERRIDE_NET
         value: "{{ $pod.net_ds }}"
       - name: QAT
@@ -76,14 +83,14 @@ spec:
       command:
       - "/bin/bash"
       - "-c"
-      args: [ "sleep infinity" ] #[ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ]
+      args: [ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ] #[ "/home/vcmts/vcmts-config/run_vcmtsd.sh" ]
       resources:
         requests:
           memory: 200Mi
           cpu: {{ $pod.num_lcores_required }}
           hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
-          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_ds: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1'
+          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1'
           {{ if $pod.qat }}
           qat.intel.com/generic: '1'
           {{ end }}
@@ -91,8 +98,8 @@ spec:
           memory: 200Mi
           cpu: {{ $pod.num_lcores_required }}
           hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
-          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_us: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_socket_{{ $pod.cpu_socket_id }}_ds: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1'
+          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1'
           {{ if $pod.qat }}
           qat.intel.com/generic: '1'
           {{ end }}

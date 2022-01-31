@@ -36,9 +36,9 @@
 
 source /home/vcmts/pktgen-config/pktgen-host-config.sh
 
-var="PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_"$CPU_SOCKET_ID"_US"
+var="PCIDEVICE_OPENSHIFT_IO_PKTGEN_NW_VF_US_"$PF_INDEX""
 PCIADDR_0=$(eval echo \$$var)
-var="PCIDEVICE_OPENSHIFT_IO_VCMTS_NW_VF_SOCKET_"$CPU_SOCKET_ID"_DS"
+var="PCIDEVICE_OPENSHIFT_IO_PKTGEN_NW_VF_DS_"$PF_INDEX""
 PCIADDR_1=$(eval echo \$$var)
 
 if [[ ! -z $OVERRIDE_PCIADDR_0 ]]; then

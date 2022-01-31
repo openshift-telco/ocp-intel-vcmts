@@ -18,8 +18,8 @@ metadata:
      cpu-load-balancing.crio.io: "disable"
      # use sriov networks
      k8s.v1.cni.cncf.io/networks: '[
-        { "name": "pktgen-ds" },
-        {"name": "pktgen-us"}
+        { "name": "pktgen-ds-{{ $pod.pf_index}}"},
+        {"name": "pktgen-us-{{ $pod.pf_index}}"}
     ]'
 spec:
   runtimeClassName: performance-pktgen-profile0
@@ -39,6 +39,8 @@ spec:
         value: "{{$pod.num_sockets}}"
       - name: CPU_SOCKET_ID
         value: "{{$pod.cpu_socket_id}}"
+      - name: PF_INDEX
+        value: "{{$pod.pf_index}}"
       - name: OVERRIDE_PCIADDR_0
         value: "{{$port_0.net_pktgen}}"
       - name: OVERRIDE_PCIADDR_1
@@ -54,13 +56,13 @@ spec:
       resources:
         requests:
           memory: 200Mi 
-          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_us: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_ds: '1' # change intel.com to openshift.io
+          openshift.io/pktgen_nw_vf_us_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
+          openshift.io/pktgen_nw_vf_ds_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
           hugepages-{{$pod.hpg_sz}}: 3Gi
         limits:
           memory: 200Mi 
-          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_us: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_socket_{{$pod.cpu_socket_id}}_ds: '1' # change intel.com to openshift.io
+          openshift.io/pktgen_nw_vf_us_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
+          openshift.io/pktgen_nw_vf_ds_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
           hugepages-{{$pod.hpg_sz}}: 3Gi
       volumeMounts:
         - name: sysfs
