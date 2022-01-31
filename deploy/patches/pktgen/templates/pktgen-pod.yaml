@@ -39,6 +39,8 @@ spec:
         value: "{{$pod.num_sockets}}"
       - name: CPU_SOCKET_ID
         value: "{{$pod.cpu_socket_id}}"
+      - name: PF_INDEX
+        value: "{{$pod.pf_index}}"
       - name: OVERRIDE_PCIADDR_0
         value: "{{$port_0.net_pktgen}}"
       - name: OVERRIDE_PCIADDR_1

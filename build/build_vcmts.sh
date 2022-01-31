@@ -33,7 +33,7 @@ source ${VCMTS_ROOT}/vcmts/tools/vcmts-env/env.sh
 
 echo -e "Install packages and dependencies"
 dnf install -y --nogpgcheck --disableplugin=subscription-manager \
-  git golang gcc-c++ gcc cmake make automake autoconf patch libtool openssl-devel python3-pip wget xz bzip2 systemd-devel \
+  git golang gcc-c++ gcc cmake make automake autoconf patch libtool openssl-devel python3-pip wget xz bzip2 systemd-devel numactl-devel \
   http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/nasm-2.15.03-3.el8.x86_64.rpm \
   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/34/Everything/x86_64/os/Packages/l/libcollectdclient-5.12.0-2.fc34.x86_64.rpm \
   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/34/Everything/x86_64/os/Packages/l/libcollectdclient-devel-5.12.0-2.fc34.x86_64.rpm \
