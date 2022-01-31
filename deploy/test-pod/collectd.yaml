@@ -49,7 +49,7 @@ spec:
         privileged: true
       image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-collectd:21.10.0
       command: ["/bin/sh"]
-      args: ["-c", "sleep infinity"] # /usr/sbin/collectd -C /etc/collectd.d/collectd.conf
+      args: ["-c", "/usr/sbin/collectd -C /etc/collectd.d/collectd.conf"]
       imagePullPolicy: Always
       volumeMounts:
         - name: collectd

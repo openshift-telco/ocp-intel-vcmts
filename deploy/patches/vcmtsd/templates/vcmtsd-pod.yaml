@@ -11,8 +11,8 @@ metadata:
      irq-load-balancing.crio.io: "disable"
      cpu-load-balancing.crio.io: "disable"
      k8s.v1.cni.cncf.io/networks: '[
-        { "name": "vcmts-ds-{{ $pod.pf_index}}"}, # Add pf_index reference here
-        {"name": "vcmts-us-{{ $pod.pf_index}}"} # Add pf_index reference here
+        { "name": "vcmts-ds-{{ $pod.pf_index}}"},
+        {"name": "vcmts-us-{{ $pod.pf_index}}"}
     ]'
 spec:
   runtimeClassName: performance-vcmts-profile0
@@ -88,10 +88,8 @@ spec:
           memory: 200Mi
           cpu: {{ $pod.num_lcores_required }}
           hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
-          # Remove cpu_socket_id reference
-          # Add pf_index reference to requests
-          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1'
+          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1'
           {{ if $pod.qat }}
           qat.intel.com/generic: '1'
           {{ end }}
@@ -99,10 +97,8 @@ spec:
           memory: 200Mi
           cpu: {{ $pod.num_lcores_required }}
           hugepages-{{ $pod.hpg_sz }}: {{ $pod.hpg_alloc_sz }}
-          # Remove cpu_socket_id reference
-          # Add pf_index reference to limits
-          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
-          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1' # change intel.com to openshift.io
+          openshift.io/vcmts_nw_vf_us_{{ $pod.pf_index }}: '1'
+          openshift.io/vcmts_nw_vf_ds_{{ $pod.pf_index }}: '1'
           {{ if $pod.qat }}
           qat.intel.com/generic: '1'
           {{ end }}

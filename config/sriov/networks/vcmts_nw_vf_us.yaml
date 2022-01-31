@@ -16,7 +16,7 @@ metadata:
   name: vcmts-us-1
 spec:
   networkNamespace: vcmts-build
-  resourceName: vcmts_nw_vf_us-1
+  resourceName: vcmts_nw_vf_us_1
   spoofChk: 'off'
   trust: 'on'
 ---
@@ -27,7 +27,7 @@ metadata:
   name: vcmts-us-2
 spec:
   networkNamespace: vcmts-build
-  resourceName: vcmts_nw_vf_us-2
+  resourceName: vcmts_nw_vf_us_2
   spoofChk: 'off'
   trust: 'on'
 ---
@@ -38,6 +38,6 @@ metadata:
   name: vcmts-us-3
 spec:
   networkNamespace: vcmts-build
-  resourceName: vcmts_nw_vf_us-3
+  resourceName: vcmts_nw_vf_us_3
   spoofChk: 'off'
   trust: 'on'

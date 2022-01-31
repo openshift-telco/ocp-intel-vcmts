@@ -18,8 +18,8 @@ metadata:
      cpu-load-balancing.crio.io: "disable"
      # use sriov networks
      k8s.v1.cni.cncf.io/networks: '[
-        { "name": "pktgen-ds-{{ $pod.pf_index}}"}, # Add pf_index reference here
-        {"name": "pktgen-us-{{ $pod.pf_index}}"} # Add pf_index reference here
+        { "name": "pktgen-ds-{{ $pod.pf_index}}"},
+        {"name": "pktgen-us-{{ $pod.pf_index}}"}
     ]'
 spec:
   runtimeClassName: performance-pktgen-profile0

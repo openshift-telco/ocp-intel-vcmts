@@ -4,7 +4,7 @@ metadata:
   namespace: openshift-sriov-network-operator
   name: pktgen-ds-0
 spec:
-  networkNamespace: pktgen-build
+  networkNamespace: vcmts-build
   resourceName: pktgen_nw_vf_ds_0
   spoofChk: 'off'
   trust: 'on'
@@ -15,7 +15,7 @@ metadata:
   namespace: openshift-sriov-network-operator
   name: pktgen-ds-1
 spec:
-  networkNamespace: pktgen-build
+  networkNamespace: vcmts-build
   resourceName: pktgen_nw_vf_ds_1
   spoofChk: 'off'
   trust: 'on'
@@ -26,7 +26,7 @@ metadata:
   namespace: openshift-sriov-network-operator
   name: pktgen-ds-2
 spec:
-  networkNamespace: pktgen-build
+  networkNamespace: vcmts-build
   resourceName: pktgen_nw_vf_ds_2
   spoofChk: 'off'
   trust: 'on'
@@ -37,7 +37,7 @@ metadata:
   namespace: openshift-sriov-network-operator
   name: pktgen-ds-3
 spec:
-  networkNamespace: pktgen-build
+  networkNamespace: vcmts-build
   resourceName: pktgen_nw_vf_ds_3
   spoofChk: 'off'
   trust: 'on'
