@@ -1,7 +1,7 @@
 images:
   vcmts_pktgen: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-pktgen:21.10.0
 topology:
-  pktgen_replicas: 16
+  pktgen_replicas: 4
   pktgen_pods:
   - pktgen_id: 0
     pf_index: 0

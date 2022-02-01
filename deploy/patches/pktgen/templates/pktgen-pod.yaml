@@ -30,6 +30,7 @@ spec:
       tty: true
       stdin: true
       image: {{$images.vcmts_pktgen}}
+      imagePullPolicy: Always
       env:
       - name: LUA_PATH  
         value: "/home/vcmts/Pktgen.lua"
@@ -52,7 +53,7 @@ spec:
       command:
       - "/bin/bash"
       - "-c"
-      args:  [ "sleep infinity" ] #[ "/home/vcmts/pktgen-config/run_pktgen.sh" ]
+      args:  [ "/home/vcmts/pktgen-config/run_pktgen.sh" ] #[ "/home/vcmts/pktgen-config/run_pktgen.sh" ]
       resources:
         requests:
           memory: 200Mi 

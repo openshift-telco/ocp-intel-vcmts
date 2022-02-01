@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-pktgen
+  namespace: vcmts-build
+data:
+  pktgen-config.lua: |
+    package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
+
+    pktgen.set("0", "rate", "UPSTREAM_RATE");
+    pktgen.set("1", "rate", "DOWNSTREAM_RATE");
+    if ( "START" == "true" ) then
+      pktgen.start("all");
+    end
+    if ( "STOP" == "true" ) then
+      pktgen.stop("all");
+    end
