@@ -52,6 +52,9 @@ echo -e "Copy helper scripts"
 mkdir ${VCMTS_ROOT}/pktgen/container/pktgen-config
 cp ${VCMTS_ROOT}/tools/vcmts-env/*.sh ${VCMTS_ROOT}/pktgen/container/pktgen-config
 
+wget https://raw.githubusercontent.com/pktgen/Pktgen-DPDK/pktgen-19.10.0/Pktgen.lua -O ${VCMTS_ROOT}/pktgen/container/Pktgen.lua
+
+
 echo -e "Build DPDK"
 build_baremetal_dpdk
 
