@@ -8,8 +8,6 @@ kind: Pod
 metadata:
   name: vcmtsd-{{- $pod.sg_id }}
   annotations: # use sriov networks
-     irq-load-balancing.crio.io: "disable"
-     cpu-load-balancing.crio.io: "disable"
      k8s.v1.cni.cncf.io/networks: '[
         { "name": "vcmts-ds-{{ $pod.pf_index}}"},
         {"name": "vcmts-us-{{ $pod.pf_index}}"}
