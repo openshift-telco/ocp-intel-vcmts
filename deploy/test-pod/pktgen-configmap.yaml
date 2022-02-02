@@ -4,14 +4,49 @@ metadata:
   name: config-pktgen
   namespace: vcmts-build
 data:
-  pktgen-config.lua: |
-    package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
+  set.sh: |
+    #!/bin/bash
+    PKTGEN_IPS=$(oc get pods -n vcmts-build -l name=pktgen --sort-by=.metadata.name -o jsonpath='{.items[*].status.podIP}')
+    PKTGEN_IP_ARRAY=($(echo $PKTGEN_IPS | tr ";" "\n"))
 
-    pktgen.set("0", "rate", "UPSTREAM_RATE");
-    pktgen.set("1", "rate", "DOWNSTREAM_RATE");
-    if ( "START" == "true" ) then
-      pktgen.start("all");
-    end
-    if ( "STOP" == "true" ) then
-      pktgen.stop("all");
-    end
+    cp pktgen-set.lua ../config.lua
+    sed -i "s/STREAM/$1/" ../config.lua
+    sed -i "s/RATE/$2/" ../config.lua
+
+    i=23000
+    for ip in "${PKTGEN_IP_ARRAY[@]}"
+    do
+        socat - TCP4:$ip:$i < ../config.lua
+        ((i=i+1))
+    done
+
+    rm ../config.lua
+  start.sh: |
+    #!/bin/bash
+    PKTGEN_IPS=$(oc get pods -n vcmts-build -l name=pktgen --sort-by=.metadata.name -o jsonpath='{.items[*].status.podIP}')
+    PKTGEN_IP_ARRAY=($(echo $PKTGEN_IPS | tr ";" "\n"))
+    i=23000
+    for ip in "${PKTGEN_IP_ARRAY[@]}"
+    do
+        socat - TCP4:$ip:$i < pktgen-start.lua
+        ((i=i+1))
+    done
+  stop.sh: |
+    #!/bin/bash
+    PKTGEN_IPS=$(oc get pods -n vcmts-build -l name=pktgen --sort-by=.metadata.name -o jsonpath='{.items[*].status.podIP}')
+    PKTGEN_IP_ARRAY=($(echo $PKTGEN_IPS | tr ";" "\n"))
+    i=23000
+    for ip in "${PKTGEN_IP_ARRAY[@]}"
+    do
+        socat - TCP4:$ip:$i < pktgen-stop.lua
+        ((i=i+1))
+    done
+  pktgen-set.lua: |
+    package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
+    pktgen.set("STREAM", "rate", "RATE");
+  pktgen-start.lua: |
+    package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
+    pktgen.start("all");
+  pktgen-stop.lua: |
+    package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
+    pktgen.stop("all");

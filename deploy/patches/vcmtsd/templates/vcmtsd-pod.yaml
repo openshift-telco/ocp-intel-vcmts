@@ -23,7 +23,7 @@ spec:
   containers:
     - name: vcmtsd-{{- $pod.sg_id }}
       image: {{$pod.vcmtsd_image}}
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
       ports:
       - containerPort: {{ $pod.tls_port }}
         hostPort: {{ $pod.tls_port }}

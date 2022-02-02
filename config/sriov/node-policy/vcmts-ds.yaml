@@ -10,11 +10,11 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens785f1#0-3'
+      - 'ens785f1#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/vcmts: ''
-  numVfs: 8
+  numVfs: 14
   priority: 99
   resourceName: vcmts_nw_vf_ds_0
 ---
@@ -30,11 +30,11 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens786f1#0-3'
+      - 'ens786f1#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/vcmts: ''
-  numVfs: 8
+  numVfs: 14
   priority: 99
   resourceName: vcmts_nw_vf_ds_1
 ---
@@ -50,11 +50,11 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens801f1#0-3'
+      - 'ens801f1#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/vcmts: ''
-  numVfs: 8
+  numVfs: 14
   priority: 99
   resourceName: vcmts_nw_vf_ds_2
 ---
@@ -70,11 +70,11 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens802f1#0-3'
+      - 'ens802f1#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/vcmts: ''
-  numVfs: 8
+  numVfs: 14
   priority: 99
   resourceName: vcmts_nw_vf_ds_3
 ---

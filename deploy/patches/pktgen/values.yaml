@@ -1,7 +1,7 @@
 images:
   vcmts_pktgen: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-pktgen:21.10.0
 topology:
-  pktgen_replicas: 4
+  pktgen_replicas: 28
   pktgen_pods:
   - pktgen_id: 0
     pf_index: 0
@@ -60,7 +60,7 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 4
-    pf_index: 1
+    pf_index: 0
     num_sockets: 2
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -74,7 +74,7 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 5
-    pf_index: 1
+    pf_index: 0
     num_sockets: 2
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -88,7 +88,7 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 6
-    pf_index: 1
+    pf_index: 0
     num_sockets: 2
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -116,9 +116,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 8
-    pf_index: 2
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -130,9 +130,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 9
-    pf_index: 2
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -144,9 +144,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 10
-    pf_index: 2
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -158,9 +158,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 11
-    pf_index: 2
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -172,9 +172,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 12
-    pf_index: 3
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -186,9 +186,9 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 13
-    pf_index: 3
+    pf_index: 1
     num_sockets: 2
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     ports:
     - port_0:
@@ -200,7 +200,7 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 14
-    pf_index: 3
+    pf_index: 2
     num_sockets: 2
     cpu_socket_id: 1
     hpg_sz: 1Gi
@@ -214,6 +214,174 @@ topology:
       num_ofdm: 6
       num_subs: 300
   - pktgen_id: 15
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 16
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 17
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 18
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 19
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 20
+    pf_index: 2
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 21
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 22
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 23
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 24
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 25
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 26
+    pf_index: 3
+    num_sockets: 2
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    ports:
+    - port_0:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+    - port_1:
+      traffic_type: imix2
+      num_ofdm: 6
+      num_subs: 300
+  - pktgen_id: 27
     pf_index: 3
     num_sockets: 2
     cpu_socket_id: 1

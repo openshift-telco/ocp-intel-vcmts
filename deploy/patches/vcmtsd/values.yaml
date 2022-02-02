@@ -1,5 +1,5 @@
 topology:
-  vcmts_replicas: 16
+  vcmts_replicas: 28
   vcmts_pods:
   - service_group_config:
     cpu_socket_id: 0
@@ -125,7 +125,7 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8104
-    pf_index: 1
+    pf_index: 0
   - service_group_config:
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -150,7 +150,7 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8105
-    pf_index: 1
+    pf_index: 0
   - service_group_config:
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -175,7 +175,7 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8106
-    pf_index: 1
+    pf_index: 0
   - service_group_config:
     cpu_socket_id: 0
     hpg_sz: 1Gi
@@ -202,12 +202,12 @@ topology:
     tls_port: 8107
     pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -225,14 +225,14 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8108
-    pf_index: 2
+    pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -250,14 +250,14 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8109
-    pf_index: 2
+    pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -275,14 +275,14 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8110
-    pf_index: 2
+    pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -300,14 +300,14 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8111
-    pf_index: 2
+    pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -325,14 +325,14 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8112
-    pf_index: 3
+    pf_index: 1
   - service_group_config:
-    cpu_socket_id: 1
+    cpu_socket_id: 0
     hpg_sz: 1Gi
     core_config: 1us1t_1ds2t
     template_config: vcmts-us1t_ds2t.cfg
-    socket_mem: 0,768
-    socket_lim: 0,896
+    socket_mem: 768,0
+    socket_lim: 896,0
     hpg_alloc_sz: 1024Mi
     num_lcores_required: 4
     vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
@@ -350,7 +350,7 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8113
-    pf_index: 3
+    pf_index: 1
   - service_group_config:
     cpu_socket_id: 1
     hpg_sz: 1Gi
@@ -375,7 +375,7 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8114
-    pf_index: 3
+    pf_index: 2
   - service_group_config:
     cpu_socket_id: 1
     hpg_sz: 1Gi
@@ -400,4 +400,304 @@ topology:
     qat: no
     power_mgmt: pm_off
     tls_port: 8115
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 2
+    sg_id: 16
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8116
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 2
+    sg_id: 17
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8117
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 3
+    sg_id: 18
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8118
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 3
+    sg_id: 19
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8119
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 4
+    sg_id: 20
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8120
+    pf_index: 2
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 4
+    sg_id: 21
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8121
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 5
+    sg_id: 22
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8122
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 5
+    sg_id: 23
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8123
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 6
+    sg_id: 24
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8124
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 6
+    sg_id: 25
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8125
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 7
+    sg_id: 26
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8126
+    pf_index: 3
+  - service_group_config:
+    cpu_socket_id: 1
+    hpg_sz: 1Gi
+    core_config: 1us1t_1ds2t
+    template_config: vcmts-us1t_ds2t.cfg
+    socket_mem: 0,768
+    socket_lim: 0,896
+    hpg_alloc_sz: 1024Mi
+    num_lcores_required: 4
+    vcmtsd_image: image-registry.openshift-image-registry.svc:5000/vcmts-build/vcmts-d:21.10.0
+    latency: yes
+    cycles: yes
+    app_stats: yes
+    us_sched_enabled: false
+    us_sched_id: 7
+    sg_id: 27
+    num_ofdm: 6
+    num_subs: 300
+    cm_crypto: aes
+    aes_key_size: 16
+    crc: yes
+    qat: no
+    power_mgmt: pm_off
+    tls_port: 8127
     pf_index: 3

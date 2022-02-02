@@ -30,7 +30,7 @@ spec:
       tty: true
       stdin: true
       image: {{$images.vcmts_pktgen}}
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
       env:
       - name: LUA_PATH  
         value: "/home/vcmts/Pktgen.lua"
