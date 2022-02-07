@@ -4,8 +4,8 @@ metadata:
   name: vcmts-profile0
 spec:
   cpu:
-    isolated: 4-31,36-63,68-95,100-127
-    reserved: 0-3,32-35,64-67,96-99
+    isolated: '2-31,34-63,66-95,98-127'
+    reserved: '0-1,32-33,64-65,96-97'
   hugepages:
     defaultHugepagesSize: 1G
     pages:

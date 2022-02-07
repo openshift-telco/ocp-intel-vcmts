@@ -1,4 +1,24 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pcm-monitoring
+  namespace: vcmts-build
+data:
+  get_bandwidth_pcm.sh: |-
+    #!/usr/bin/env bash
+    pcm-memory 10 | grep --line-buffered 'System Memory Throughput' | awk -vfile=/root/bandwidth.out -F'[^0-9]*' '{ print $2 > file; close(file)}' > /dev/null &
+    hostname=$(hostname) if [ $VCMTS_ENVIRONMENT == "bmra_k8s" ]; then
+      unixsock_path=/var/run/collectd/collectd.sock
+    else
+      unixsock_path=/opt/collectd/var/run/collectd.sock
+    fi
+    while [ true ]; do
+      mem_bandwidth=$(cat /root/pcm/bandwidth.out)
+      echo "PUTVAL "$hostname/mem_bw/bytes" interval=10 N:$mem_bandwidth" | socat - UNIX-CLIENT:$unixsock_path
+      sleep 10
+    done
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: pcm

@@ -1,0 +1,18 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfigPool
+metadata:
+  name: pktgen
+  labels:
+    custom-kubelet: max-pods-500
+    machineconfiguration.openshift.io/role: pktgen
+spec:
+  machineConfigSelector:
+    matchExpressions:
+      - key: machineconfiguration.openshift.io/role
+        operator: In
+        values:
+          - worker
+          - pktgen
+  nodeSelector:
+    matchLabels:
+      node-role.kubernetes.io/pktgen: ''

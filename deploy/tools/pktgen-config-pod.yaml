@@ -50,3 +50,30 @@ data:
   pktgen-stop.lua: |
     package.path = package.path ..";?.lua;test/?.lua;app/?.lua;"
     pktgen.stop("all");
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pktgen1
+  namespace: vcmts-build
+  labels:
+    app: pktgen-helper
+spec:
+  containers:
+    - name: config-pktgen
+      image: docker.io/adetalhouet/socat
+      command:
+        - /bin/bash
+        - -c
+        - sleep infinity
+      volumeMounts:
+        - name: config-pktgen
+          mountPath: /opt/scripts
+  restartPolicy: Never
+  serviceAccount: pipeline
+  serviceAccountName: pipeline
+  volumes:
+    - name: config-pktgen
+      configMap:
+        name: config-pktgen
+        defaultMode: 0777

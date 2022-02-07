@@ -15,7 +15,7 @@ Labels are define as follow in repsective pod:
 - do not rely on pci override
 
 #### pktgen
-- Where /home/vcmts/Pktgen.lua comes from?
+- Add /home/vcmts/Pktgen.lua
     - https://raw.githubusercontent.com/pktgen/Pktgen-DPDK/pktgen-19.10.0/Pktgen.lua
 - fork `pktgen-host-config.sh` to add PCI PF/VF mapping
 -`run_pktgen.sh`
