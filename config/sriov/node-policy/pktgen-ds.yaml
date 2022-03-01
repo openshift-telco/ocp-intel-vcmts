@@ -10,7 +10,7 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens785f1#0-6'
+      - 'ens785#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/pktgen: ''
@@ -30,7 +30,7 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens786f1#0-6'
+      - 'ens786#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/pktgen: ''
@@ -50,7 +50,7 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens801f1#0-6'
+      - 'ens801#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/pktgen: ''
@@ -70,7 +70,7 @@ spec:
   nicSelector:
     deviceID: '1592'
     pfNames:
-      - 'ens802f1#0-6'
+      - 'ens802#0-6'
     vendor: '8086'
   nodeSelector:
     node-role.kubernetes.io/pktgen: ''
