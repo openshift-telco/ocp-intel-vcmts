@@ -12,12 +12,12 @@ LABEL io.openshift.tags="vcmts collectd"
 RUN dnf install -y --setopt=tsflags=nodocs --nogpgcheck --disableplugin=subscription-manager python2 python2-devel \
 http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/OpenIPMI-libs-2.0.31-3.el8.x86_64.rpm \
 http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/libmicrohttpd-0.9.59-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-5.11.0-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-ipmi-5.11.0-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-pmu-5.11.0-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-python-5.11.0-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-turbostat-5.11.0-2.el8.x86_64.rpm \
-http://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-write_http-5.11.0-2.el8.x86_64.rpm
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-5.11.0-2.el8.x86_64.rpm \
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-ipmi-5.11.0-2.el8.x86_64.rpm \
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-pmu-5.11.0-2.el8.x86_64.rpm \
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-python-5.11.0-2.el8.x86_64.rpm \
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-turbostat-5.11.0-2.el8.x86_64.rpm \
+https://vault.centos.org/centos/8/opstools/x86_64/collectd-5/Packages/c/collectd-write_http-5.11.0-2.el8.x86_64.rpm
 RUN dnf clean all && rm -fr /var/cache/dnf
 
 RUN pip2 install python-config
