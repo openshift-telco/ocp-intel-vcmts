@@ -14,6 +14,6 @@ VCMTS_ROOT="/usr/src/vcmts"
 IMAGE_NAME=${REGISTRY_URL}/vcmts-pktgen-manager
 IMAGE_TAG=${IMAGE_NAME}:${VCMTS_VERSION}
 
-cp containerfiles/
+cd containerfiles/
 buildah --storage-driver vfs bud --build-arg VCMTS_VERSION=$VCMTS_VERSION -t ${IMAGE_TAG} socat-Containerfile
 buildah --storage-driver vfs push ${IMAGE_TAG}
