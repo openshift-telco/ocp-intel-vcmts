@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  C62x: 8086 37C9 d002
+kind: ConfigMap
+metadata:
+  name: unsupported-nic-ids
+  namespace: openshift-sriov-network-operator

@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qat-numvfs
+  namespace: inteldeviceplugins-system
+data:
+  create_vfs.sh: |-
+    #!/bin/sh
+    for dev in `for pf in 4941 0435 19a3 37c8 6f54 4940 18a0; do lspci | awk -v dev="8086:$pf" '$0 ~ dev {print "0000:" $1}'; done`; do
+      DEVPATH="/sys/bus/pci/devices/$dev"
+      NUMVFS="$DEVPATH/sriov_numvfs"
+      if [ -w "$NUMVFS" -a $(cat "$NUMVFS") -eq 0 ]; then
+        cat "$DEVPATH/sriov_totalvfs" | tee "$NUMVFS"
+      fi
+    done
+    sleep infinity
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qat-sriov-numvfs
+  namespace: inteldeviceplugins-system
+spec:
+  nodeSelector:
+    vcmts: "true"
+  containers:
+    - name: qat-sriov-numvfs
+      image: busybox
+      command: ["/bin/sh", "-c"]
+      args: ["/opt/create_vfs.sh"]
+      securityContext:
+        readOnlyRootFilesystem: true
+        privileged: true
+      volumeMounts:
+        - name: sysfs
+          mountPath: /sys
+          readOnly: false
+        - name: qat-numvfs
+          mountPath: /opt/create_vfs.sh
+          subPath: create_vfs.sh
+  volumes:
+    - name: qat-numvfs
+      configMap:
+        name: qat-numvfs
+        defaultMode: 0777
+    - name: sysfs
+      hostPath:
+        path: /sys
+---

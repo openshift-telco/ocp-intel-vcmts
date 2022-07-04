@@ -1,0 +1,19 @@
+variant: openshift
+version: 4.8.0
+metadata:
+  name: 100-worker-vfiopci
+  labels:
+    machineconfiguration.openshift.io/role: vcmts 
+storage:
+  files:
+  - path: /etc/modprobe.d/vfio.conf
+    mode: 0644
+    overwrite: true
+    contents:
+      inline: |
+        options vfio-pci disable_denylist=1
+  - path: /etc/modules-load.d/vfio-pci.conf 
+    mode: 0644
+    overwrite: true
+    contents:
+      inline: vfio-pci

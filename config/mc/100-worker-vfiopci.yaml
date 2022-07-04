@@ -1,0 +1,22 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: vcmts
+  name: 100-vcmts-vfiopci
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+        - contents:
+            source: data:,options%20vfio-pci%20disable_denylist%3D1%0A
+          mode: 420
+          overwrite: true
+          path: /etc/modprobe.d/vfio.conf
+        - contents:
+            source: data:,vfio-pci
+          mode: 420
+          overwrite: true
+          path: /etc/modules-load.d/vfio-pci.conf

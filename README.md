@@ -6,9 +6,9 @@
 - [Introduction](#introduction)
 - [Prerequisities](#prerequisities)
 - [Build Container Images](#build-container-images)
-- [Node configuration](#node-configuration)
-  - [Machine configuration](#machine-configuration)
-  - [Performance Addon](#performance-addon)
+- [Machine configuration](#machine-configuration)
+- [Performance Addon Operator Configuration](#performance-addon-operator-configuration)
+- [QAT configuration](#qat-configuration)
 - [SRIOV Configuration](#sriov-configuration)
 - [Monitoring](#monitoring)
 - [Deploy the application](#deploy-the-application)
@@ -34,8 +34,7 @@ Ensure to have the following elements in hand and/or deployed. For the various o
   - Podman / Buildah (for local build only)
 
 
-
-## Setup internal image resitry (if not setup already)
+### Setup internal image resitry (if not setup already)
 
 ~~~
 oc apply -f config/image-registry/pvc.yaml
@@ -43,12 +42,14 @@ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patc
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim":"image-registry-storage"}}}}'
 ~~~
 
+### Setup ODF (if not setup already)
+
+Scripts have been provided under [config/odf](config/odf) to help boostrap an Ceph Cluster over two nodes. This is not a supported deployment and we advice using minimum 3 nodes.
+
 ## Build Container Images
 They are two ways to build the vCMTS related applications, please see [build options](build/README.md).
 
-## Node configuration
-
-### Machine configuration
+## Machine configuration
 By default, an OpenShift cluster have two node roles (`master` and `worker`), identified by their respective `MachineConfigPool` and `machineconfiguration.openshift.io/role` label.
 
 Each `MachineConfigPool` is a collection of `MachineConfig` identified by the label `machineconfiguration.openshift.io/role`.
@@ -84,7 +85,7 @@ oc create -f config/mcp/pktgen.yaml
 
 After a few minutes, they will have rendered their respective configuration (that is, so far, only comprised on `MachineConfig` of workers, given we haven't yet added any `MachineConfig` for our specific node types).
 
-### Performance Addon
+## Performance Addon Operator Configuration
 In order to enable advanced node performance tunings, we are using the Performance Addon Operator.
 
 Both the vCMTS and pktgen nodes need to be configured with appropriate CPU isolation and Hugepages.
@@ -123,6 +124,75 @@ NAME                             GENERATEDBYCONTROLLER                      IGNI
 ~~~
 
 The machine config operator will see these new `MachineConfig` and will render the new target configuration for the respective `MachineConfigPool`. Once rendered, the configuration will be applied on the node part by the updated `MachineConfigPool`.
+
+## QAT configuration
+
+### Prerequisites
+vfio-pci kernel module has QAT included on it's deny list on latest kernel versions hence we need to disable the deny list by unloading the module and re-loading it.
+NOTE: ensure no dataplane applications using devices bound to vfio-pci driver are running when doing this step.
+
+(not recommanded) To perform these steps manually, log on the vcmts-d server and run the following commands:
+    ~~~
+    sudo rmmod vfio-pci
+    sudo modprobe vfio-pci disable_denylist=1
+    ~~~
+
+(recommanded) Apply the vfio-pci kernel module config using a MachineConfig, making this configuration persistent to upgrades.
+    ```
+    oc create -f 100-worker-vfiopci.yaml
+    ```
+
+### Instalation
+1. Install Node Feature Discovery operator
+    ~~~
+    oc apply -f config/nfd/nfd-sub.yaml
+    ~~~
+
+2. Create NFD namespace and instance specifying '0b40' as the device class
+    ```
+    oc create ns openshift-nfd
+    oc create -f config/nfd/node-feature-discovery.yaml
+    ```
+
+3. Install the Intel Device Plugins Operator
+    Allow the default Service Account to run pod using any user ID
+    ```
+    oc adm policy add-scc-to-user hostmount-anyuid -z default  -n openshift-operators
+    ```
+    Install the OperatorHub CatalogSource and the plugin
+    ```
+    oc create -f config/inteldeviceplugins/catalog-source.yaml
+    oc apply -f config/inteldeviceplugins/inteldeviceplugins-sub.yaml
+    ```
+
+4. Create the QAT VFs
+    ```
+    oc create ns inteldeviceplugins-system
+    oc create -f qat-sriov-numvfs.yaml
+    ```
+
+5. Create the QatDevicePlugin custom resource definition
+    ```
+    oc create -f qat-device-plugin.yaml
+    ```
+
+    The initial deployment of the QAT Device Plugin will fail. The daemonset needs to be given privilege in order to run correctly.
+    ```
+    oc patch daemonset/intel-qat-plugin -n openshift-operators --type=json -p='[{"op": "add", "path": "/spec/template/spec/containers/0/securityContext/privileged", "value": true}]'
+    ```
+
+6. Verify it is running
+  ```
+  $ oc get all -n openshift-operators | grep qat
+  pod/intel-qat-plugin-kn4gn                                   1/1     Running   1          20h
+  daemonset.apps/intel-qat-plugin   1         1         1       1            1           vcmts=true      22h
+  ```
+
+7. Verify QAT devices are available from the node
+  ```
+  $ oc get node rhtcyp002.npgcable.intel.com -o json | jq .status.allocatable | grep qat
+  "qat.intel.com/generic": "96"
+  ```
 
 ## SRIOV Configuration
 Both servers are connected back-to-back with 4 E810 network interfaces (one port per NIC).
