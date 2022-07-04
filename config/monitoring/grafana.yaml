@@ -6,7 +6,17 @@ metadata:
   name: vcmts
   namespace: vcmts-build
 spec:
-  config: {}
+  config:
+    auth:
+      disable_signout_menu: true
+    auth.anonymous:
+      enabled: true
+    log:
+      level: warn
+      mode: console
+    security:
+      admin_password: vcmts
+      admin_user: vcmts
   dashboardLabelSelector:
     - matchExpressions:
         - key: app
