@@ -38,8 +38,8 @@ dnf install -y --nogpgcheck --disableplugin=subscription-manager \
   git golang gcc-c++ gcc cmake make automake autoconf bzip2 patch libtool openssl-devel python3-pip wget xz \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/ninja-build-1.8.2-1.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/meson-0.55.3-3.el8.noarch.rpm \
-  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm \
-  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.11-3.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.14-1.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.14-1.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-11.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-devel-2.0.12-11.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/libpcap-devel-1.9.1-5.el8.x86_64.rpm \

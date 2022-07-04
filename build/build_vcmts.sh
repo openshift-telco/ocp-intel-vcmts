@@ -41,8 +41,8 @@ dnf install -y --nogpgcheck --disableplugin=subscription-manager \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/meson-0.55.3-3.el8.noarch.rpm \
   http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-11.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/numactl-devel-2.0.12-11.el8.x86_64.rpm \
-  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm \
-  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.11-3.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.14-1.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.14-1.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/yasm-1.3.0-7.el8.x86_64.rpm
 pip3 install pyelftools
 dnf clean all

@@ -39,8 +39,8 @@ dnf install -y --nogpgcheck --disableplugin=subscription-manager \
   https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/34/Everything/x86_64/os/Packages/l/libcollectdclient-devel-5.12.0-2.fc34.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/ninja-build-1.8.2-1.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/meson-0.55.3-3.el8.noarch.rpm \
-  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.11-3.el8.x86_64.rpm \
-  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.11-3.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/jansson-2.14-1.el8.x86_64.rpm \
+  http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/jansson-devel-2.14-1.el8.x86_64.rpm \
   http://mirror.centos.org/centos/8-stream/PowerTools/x86_64/os/Packages/yasm-1.3.0-7.el8.x86_64.rpm
 pip3 install pyelftools
 dnf clean all
