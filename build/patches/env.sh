@@ -532,7 +532,11 @@ function _build_pktgen {
 	fi
 	cd pktgen-dpdk/
 	git stash
-	git checkout master
+	
+	# CHANGE FROM REDHAT
+  	# git checkout master
+	git checkout main
+ 	 # ------------------
 	git pull
 	git checkout pktgen-${PKTGEN_VERSION}
 	git apply $VCMTS_ROOT/src/patches/pktgen-${PKTGEN_VERSION}/0001-pktgen.patch
