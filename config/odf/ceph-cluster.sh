@@ -11,8 +11,6 @@ set +x
 shopt -s expand_aliases
 echo "Setting up environment for ODF - this will take a few minutes"
 
-alias oc="/users/dshea/zzz/oc/./oc"
-
 oc label "$(oc get no rhtcyp001.npgcable.intel.com -o name)" cluster.ocs.openshift.io/openshift-storage='' --overwrite >/dev/null
 oc label "$(oc get no rhtcyp002.npgcable.intel.com -o name)" cluster.ocs.openshift.io/openshift-storage='' --overwrite >/dev/null
 
@@ -127,7 +125,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   storageClassName: localblock
   local:
-    path: /dev/sdc
+    path: /dev/sdb
   nodeAffinity:
     required:
       nodeSelectorTerms:
