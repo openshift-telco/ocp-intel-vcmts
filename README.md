@@ -25,7 +25,8 @@ Ensure to have the following elements in hand and/or deployed. For the various o
 
   - Intel vCMTS Package
   - Red Hat OpenShift version 4.8.20
-    - Red Hat OpenShift Data Foundation
+    - [Red Hat OpenShift Container Storage](https://docs.openshift.com/container-platform/4.8/storage/persistent_storage/persistent-storage-ocs.html)
+        - Note: in newer OpenShift version, 4.9+, this is called [OpenShift Data Foundation](https://access.redhat.com/documentation/en-us/red_hat_openshift_data_foundation/4.9)
     - [Red Hat OpenShift Pipeline Operator](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/installing-pipelines.html)
     - [SR-IOV Network Operator](https://docs.openshift.com/container-platform/4.8/networking/hardware_networks/installing-sriov-operator.html)
     - [Performance Addon Operator](https://docs.openshift.com/container-platform/4.8/scalability_and_performance/cnf-performance-addon-operator-for-low-latency-nodes.html#installing-the-performance-addon-operator_cnf-master)
@@ -182,17 +183,17 @@ NOTE: ensure no dataplane applications using devices bound to vfio-pci driver ar
     ```
 
 6. Verify it is running
-  ```
-  $ oc get all -n openshift-operators | grep qat
-  pod/intel-qat-plugin-kn4gn                                   1/1     Running   1          20h
-  daemonset.apps/intel-qat-plugin   1         1         1       1            1           vcmts=true      22h
-  ```
+    ```
+    $ oc get all -n openshift-operators | grep qat
+    pod/intel-qat-plugin-kn4gn                                   1/1     Running   1          20h
+    daemonset.apps/intel-qat-plugin   1         1         1       1            1           vcmts=true      22h
+    ```
 
 7. Verify QAT devices are available from the node
-  ```
-  $ oc get node rhtcyp002.npgcable.intel.com -o json | jq .status.allocatable | grep qat
-  "qat.intel.com/generic": "96"
-  ```
+    ```
+    $ oc get node rhtcyp002.npgcable.intel.com -o json | jq .status.allocatable | grep qat
+    "qat.intel.com/generic": "96"
+    ```
 
 ## SRIOV Configuration
 Both servers are connected back-to-back with 4 E810 network interfaces (one port per NIC).
