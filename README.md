@@ -419,3 +419,9 @@ Here is an example for applying 2.3G of traffic upstream and 7.3G of traffic dow
 oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set.sh 0 2.3'
 oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set.sh 1 7.3'
 ~~~
+
+If you have QAT enabled for some of the SG, then you need to use the below command to set the upstream or downstream traffic
+~~~
+oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set-qat.sh 0 2.3'
+oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set-qat.sh 1 9'
+~~~

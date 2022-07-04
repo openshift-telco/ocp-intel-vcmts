@@ -22,7 +22,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8100
     pf_index: 0
@@ -47,7 +47,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8101
     pf_index: 0
@@ -72,7 +72,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8102
     pf_index: 0
@@ -97,7 +97,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8103
     pf_index: 0
@@ -122,7 +122,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8104
     pf_index: 0
@@ -147,7 +147,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8105
     pf_index: 0
@@ -172,7 +172,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8106
     pf_index: 0
@@ -197,7 +197,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8107
     pf_index: 1
@@ -372,7 +372,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8114
     pf_index: 2
@@ -397,7 +397,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8115
     pf_index: 2
@@ -422,7 +422,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8116
     pf_index: 2
@@ -447,7 +447,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8117
     pf_index: 2
@@ -472,7 +472,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8118
     pf_index: 2
@@ -497,7 +497,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8119
     pf_index: 2
@@ -522,7 +522,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8120
     pf_index: 2
@@ -547,7 +547,7 @@ topology:
     cm_crypto: aes
     aes_key_size: 16
     crc: yes
-    qat: no
+    qat: yes
     power_mgmt: pm_off
     tls_port: 8121
     pf_index: 3
