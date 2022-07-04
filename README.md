@@ -33,6 +33,16 @@ Ensure to have the following elements in hand and/or deployed. For the various o
   - Helm 3
   - Podman / Buildah (for local build only)
 
+
+
+## Setup internal image resitry (if not setup already)
+
+~~~
+oc apply -f config/image-registry/pvc.yaml
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed"}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim":"image-registry-storage"}}}}'
+~~~
+
 ## Build Container Images
 They are two ways to build the vCMTS related applications, please see [build options](build/README.md).
 
