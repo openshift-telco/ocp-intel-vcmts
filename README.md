@@ -422,6 +422,8 @@ oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash 
 
 If you have QAT enabled for some of the SG, then you need to use the below command to set the upstream or downstream traffic
 ~~~
+
+##
 oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set-qat.sh 0 2.3'
 oc get pods -n vcmts-build -l app=pktgen-helper -o name | xargs -I {} /bin/bash -c 'oc rsh -n vcmts-build {} /opt/scripts/set-qat.sh 1 9'
 ~~~
